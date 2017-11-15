@@ -24,6 +24,7 @@ public class UserAction {
         TbUser findUser = null;
         try {
             findUser = userService.getUserById(id);
+            System.out.println(findUser);
         }catch (Exception e){
             logger.error(e.getMessage(), e);
             e.printStackTrace();
