@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tp.trip.dao.TbScenicActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.tp.trip.pojo.po.TbScenicActivity" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="activity_name" property="activityName" jdbcType="VARCHAR" />
+    <result column="activity_image" property="activityImage" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tp.trip.pojo.po.TbScenicActivityWithBLOBs" extends="BaseResultMap" >
+    <result column="activity_intro" property="activityIntro" jdbcType="LONGVARCHAR" />
+    <result column="activity_schedule" property="activitySchedule" jdbcType="LONGVARCHAR" />
+    <result column="activity_address" property="activityAddress" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, activity_name, activity_image
+  </sql>
+  <sql id="Blob_Column_List" >
+    activity_intro, activity_schedule, activity_address
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.tp.trip.pojo.po.TbScenicActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_scenic_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tp.trip.pojo.po.TbScenicActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_scenic_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_scenic_activity
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_scenic_activity
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tp.trip.pojo.po.TbScenicActivityExample" >
+    delete from tb_scenic_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tp.trip.pojo.po.TbScenicActivityWithBLOBs" >
+    insert into tb_scenic_activity (id, activity_name, activity_image, 
+      activity_intro, activity_schedule, 
+      activity_address)
+    values (#{id,jdbcType=BIGINT}, #{activityName,jdbcType=VARCHAR}, #{activityImage,jdbcType=VARCHAR}, 
+      #{activityIntro,jdbcType=LONGVARCHAR}, #{activitySchedule,jdbcType=LONGVARCHAR}, 
+      #{activityAddress,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tp.trip.pojo.po.TbScenicActivityWithBLOBs" >
+    insert into tb_scenic_activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="activityName != null" >
+        activity_name,
+      </if>
+      <if test="activityImage != null" >
+        activity_image,
+      </if>
+      <if test="activityIntro != null" >
+        activity_intro,
+      </if>
+      <if test="activitySchedule != null" >
+        activity_schedule,
+      </if>
+      <if test="activityAddress != null" >
+        activity_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="activityName != null" >
+        #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="activityImage != null" >
+        #{activityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="activityIntro != null" >
+        #{activityIntro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activitySchedule != null" >
+        #{activitySchedule,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activityAddress != null" >
+        #{activityAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tp.trip.pojo.po.TbScenicActivityExample" resultType="java.lang.Integer" >
+    select count(*) from tb_scenic_activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_scenic_activity
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.activityName != null" >
+        activity_name = #{record.activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityImage != null" >
+        activity_image = #{record.activityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityIntro != null" >
+        activity_intro = #{record.activityIntro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.activitySchedule != null" >
+        activity_schedule = #{record.activitySchedule,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.activityAddress != null" >
+        activity_address = #{record.activityAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_scenic_activity
+    set id = #{record.id,jdbcType=BIGINT},
+      activity_name = #{record.activityName,jdbcType=VARCHAR},
+      activity_image = #{record.activityImage,jdbcType=VARCHAR},
+      activity_intro = #{record.activityIntro,jdbcType=LONGVARCHAR},
+      activity_schedule = #{record.activitySchedule,jdbcType=LONGVARCHAR},
+      activity_address = #{record.activityAddress,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_scenic_activity
+    set id = #{record.id,jdbcType=BIGINT},
+      activity_name = #{record.activityName,jdbcType=VARCHAR},
+      activity_image = #{record.activityImage,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tp.trip.pojo.po.TbScenicActivityWithBLOBs" >
+    update tb_scenic_activity
+    <set >
+      <if test="activityName != null" >
+        activity_name = #{activityName,jdbcType=VARCHAR},
+      </if>
+      <if test="activityImage != null" >
+        activity_image = #{activityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="activityIntro != null" >
+        activity_intro = #{activityIntro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activitySchedule != null" >
+        activity_schedule = #{activitySchedule,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="activityAddress != null" >
+        activity_address = #{activityAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tp.trip.pojo.po.TbScenicActivityWithBLOBs" >
+    update tb_scenic_activity
+    set activity_name = #{activityName,jdbcType=VARCHAR},
+      activity_image = #{activityImage,jdbcType=VARCHAR},
+      activity_intro = #{activityIntro,jdbcType=LONGVARCHAR},
+      activity_schedule = #{activitySchedule,jdbcType=LONGVARCHAR},
+      activity_address = #{activityAddress,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tp.trip.pojo.po.TbScenicActivity" >
+    update tb_scenic_activity
+    set activity_name = #{activityName,jdbcType=VARCHAR},
+      activity_image = #{activityImage,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

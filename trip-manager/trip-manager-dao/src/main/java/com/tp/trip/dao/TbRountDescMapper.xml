@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tp.trip.dao.TbRountDescMapper" >
+  <resultMap id="BaseResultMap" type="com.tp.trip.pojo.po.TbRountDesc" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="scenic_id" property="scenicId" jdbcType="BIGINT" />
+    <result column="rount_id" property="rountId" jdbcType="BIGINT" />
+    <result column="rount_schedule" property="rountSchedule" jdbcType="VARCHAR" />
+    <result column="temp1" property="temp1" jdbcType="VARCHAR" />
+    <result column="temp2" property="temp2" jdbcType="VARCHAR" />
+    <result column="temp3" property="temp3" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tp.trip.pojo.po.TbRountDesc" extends="BaseResultMap" >
+    <result column="rount_intro" property="rountIntro" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, scenic_id, rount_id, rount_schedule, temp1, temp2, temp3
+  </sql>
+  <sql id="Blob_Column_List" >
+    rount_intro
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.tp.trip.pojo.po.TbRountDescExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_rount_desc
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tp.trip.pojo.po.TbRountDescExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_rount_desc
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_rount_desc
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_rount_desc
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tp.trip.pojo.po.TbRountDescExample" >
+    delete from tb_rount_desc
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tp.trip.pojo.po.TbRountDesc" >
+    insert into tb_rount_desc (id, scenic_id, rount_id, 
+      rount_schedule, temp1, temp2, 
+      temp3, rount_intro)
+    values (#{id,jdbcType=BIGINT}, #{scenicId,jdbcType=BIGINT}, #{rountId,jdbcType=BIGINT}, 
+      #{rountSchedule,jdbcType=VARCHAR}, #{temp1,jdbcType=VARCHAR}, #{temp2,jdbcType=VARCHAR}, 
+      #{temp3,jdbcType=VARCHAR}, #{rountIntro,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tp.trip.pojo.po.TbRountDesc" >
+    insert into tb_rount_desc
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="scenicId != null" >
+        scenic_id,
+      </if>
+      <if test="rountId != null" >
+        rount_id,
+      </if>
+      <if test="rountSchedule != null" >
+        rount_schedule,
+      </if>
+      <if test="temp1 != null" >
+        temp1,
+      </if>
+      <if test="temp2 != null" >
+        temp2,
+      </if>
+      <if test="temp3 != null" >
+        temp3,
+      </if>
+      <if test="rountIntro != null" >
+        rount_intro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="scenicId != null" >
+        #{scenicId,jdbcType=BIGINT},
+      </if>
+      <if test="rountId != null" >
+        #{rountId,jdbcType=BIGINT},
+      </if>
+      <if test="rountSchedule != null" >
+        #{rountSchedule,jdbcType=VARCHAR},
+      </if>
+      <if test="temp1 != null" >
+        #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="rountIntro != null" >
+        #{rountIntro,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tp.trip.pojo.po.TbRountDescExample" resultType="java.lang.Integer" >
+    select count(*) from tb_rount_desc
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_rount_desc
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.scenicId != null" >
+        scenic_id = #{record.scenicId,jdbcType=BIGINT},
+      </if>
+      <if test="record.rountId != null" >
+        rount_id = #{record.rountId,jdbcType=BIGINT},
+      </if>
+      <if test="record.rountSchedule != null" >
+        rount_schedule = #{record.rountSchedule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temp1 != null" >
+        temp1 = #{record.temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temp2 != null" >
+        temp2 = #{record.temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temp3 != null" >
+        temp3 = #{record.temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rountIntro != null" >
+        rount_intro = #{record.rountIntro,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_rount_desc
+    set id = #{record.id,jdbcType=BIGINT},
+      scenic_id = #{record.scenicId,jdbcType=BIGINT},
+      rount_id = #{record.rountId,jdbcType=BIGINT},
+      rount_schedule = #{record.rountSchedule,jdbcType=VARCHAR},
+      temp1 = #{record.temp1,jdbcType=VARCHAR},
+      temp2 = #{record.temp2,jdbcType=VARCHAR},
+      temp3 = #{record.temp3,jdbcType=VARCHAR},
+      rount_intro = #{record.rountIntro,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_rount_desc
+    set id = #{record.id,jdbcType=BIGINT},
+      scenic_id = #{record.scenicId,jdbcType=BIGINT},
+      rount_id = #{record.rountId,jdbcType=BIGINT},
+      rount_schedule = #{record.rountSchedule,jdbcType=VARCHAR},
+      temp1 = #{record.temp1,jdbcType=VARCHAR},
+      temp2 = #{record.temp2,jdbcType=VARCHAR},
+      temp3 = #{record.temp3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tp.trip.pojo.po.TbRountDesc" >
+    update tb_rount_desc
+    <set >
+      <if test="scenicId != null" >
+        scenic_id = #{scenicId,jdbcType=BIGINT},
+      </if>
+      <if test="rountId != null" >
+        rount_id = #{rountId,jdbcType=BIGINT},
+      </if>
+      <if test="rountSchedule != null" >
+        rount_schedule = #{rountSchedule,jdbcType=VARCHAR},
+      </if>
+      <if test="temp1 != null" >
+        temp1 = #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        temp2 = #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        temp3 = #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="rountIntro != null" >
+        rount_intro = #{rountIntro,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tp.trip.pojo.po.TbRountDesc" >
+    update tb_rount_desc
+    set scenic_id = #{scenicId,jdbcType=BIGINT},
+      rount_id = #{rountId,jdbcType=BIGINT},
+      rount_schedule = #{rountSchedule,jdbcType=VARCHAR},
+      temp1 = #{temp1,jdbcType=VARCHAR},
+      temp2 = #{temp2,jdbcType=VARCHAR},
+      temp3 = #{temp3,jdbcType=VARCHAR},
+      rount_intro = #{rountIntro,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tp.trip.pojo.po.TbRountDesc" >
+    update tb_rount_desc
+    set scenic_id = #{scenicId,jdbcType=BIGINT},
+      rount_id = #{rountId,jdbcType=BIGINT},
+      rount_schedule = #{rountSchedule,jdbcType=VARCHAR},
+      temp1 = #{temp1,jdbcType=VARCHAR},
+      temp2 = #{temp2,jdbcType=VARCHAR},
+      temp3 = #{temp3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

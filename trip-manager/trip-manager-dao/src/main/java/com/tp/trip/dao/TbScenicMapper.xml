@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tp.trip.dao.TbScenicMapper" >
+  <resultMap id="BaseResultMap" type="com.tp.trip.pojo.po.TbScenic" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="scenic_linkman" property="scenicLinkman" jdbcType="VARCHAR" />
+    <result column="scenic_tel" property="scenicTel" jdbcType="VARCHAR" />
+    <result column="scenic_image" property="scenicImage" jdbcType="VARCHAR" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="temp1" property="temp1" jdbcType="VARCHAR" />
+    <result column="temp2" property="temp2" jdbcType="VARCHAR" />
+    <result column="temp3" property="temp3" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tp.trip.pojo.po.TbScenicWithBLOBs" extends="BaseResultMap" >
+    <result column="scenic_name" property="scenicName" jdbcType="LONGVARCHAR" />
+    <result column="scenic_intro" property="scenicIntro" jdbcType="LONGVARCHAR" />
+    <result column="scenic_address" property="scenicAddress" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, scenic_linkman, scenic_tel, scenic_image, tid, state, created_time, update_time, 
+    temp1, temp2, temp3
+  </sql>
+  <sql id="Blob_Column_List" >
+    scenic_name, scenic_intro, scenic_address
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.tp.trip.pojo.po.TbScenicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_scenic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tp.trip.pojo.po.TbScenicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_scenic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_scenic
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_scenic
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tp.trip.pojo.po.TbScenicExample" >
+    delete from tb_scenic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tp.trip.pojo.po.TbScenicWithBLOBs" >
+    insert into tb_scenic (id, scenic_linkman, scenic_tel, 
+      scenic_image, tid, state, 
+      created_time, update_time, temp1, 
+      temp2, temp3, scenic_name, 
+      scenic_intro, scenic_address)
+    values (#{id,jdbcType=BIGINT}, #{scenicLinkman,jdbcType=VARCHAR}, #{scenicTel,jdbcType=VARCHAR}, 
+      #{scenicImage,jdbcType=VARCHAR}, #{tid,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{temp1,jdbcType=VARCHAR}, 
+      #{temp2,jdbcType=VARCHAR}, #{temp3,jdbcType=VARCHAR}, #{scenicName,jdbcType=LONGVARCHAR}, 
+      #{scenicIntro,jdbcType=LONGVARCHAR}, #{scenicAddress,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tp.trip.pojo.po.TbScenicWithBLOBs" >
+    insert into tb_scenic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="scenicLinkman != null" >
+        scenic_linkman,
+      </if>
+      <if test="scenicTel != null" >
+        scenic_tel,
+      </if>
+      <if test="scenicImage != null" >
+        scenic_image,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="temp1 != null" >
+        temp1,
+      </if>
+      <if test="temp2 != null" >
+        temp2,
+      </if>
+      <if test="temp3 != null" >
+        temp3,
+      </if>
+      <if test="scenicName != null" >
+        scenic_name,
+      </if>
+      <if test="scenicIntro != null" >
+        scenic_intro,
+      </if>
+      <if test="scenicAddress != null" >
+        scenic_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="scenicLinkman != null" >
+        #{scenicLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicTel != null" >
+        #{scenicTel,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicImage != null" >
+        #{scenicImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="temp1 != null" >
+        #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicName != null" >
+        #{scenicName,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="scenicIntro != null" >
+        #{scenicIntro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="scenicAddress != null" >
+        #{scenicAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tp.trip.pojo.po.TbScenicExample" resultType="java.lang.Integer" >
+    select count(*) from tb_scenic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_scenic
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.scenicLinkman != null" >
+        scenic_linkman = #{record.scenicLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scenicTel != null" >
+        scenic_tel = #{record.scenicTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scenicImage != null" >
+        scenic_image = #{record.scenicImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
+      <if test="record.createdTime != null" >
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.temp1 != null" >
+        temp1 = #{record.temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temp2 != null" >
+        temp2 = #{record.temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temp3 != null" >
+        temp3 = #{record.temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scenicName != null" >
+        scenic_name = #{record.scenicName,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.scenicIntro != null" >
+        scenic_intro = #{record.scenicIntro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.scenicAddress != null" >
+        scenic_address = #{record.scenicAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_scenic
+    set id = #{record.id,jdbcType=BIGINT},
+      scenic_linkman = #{record.scenicLinkman,jdbcType=VARCHAR},
+      scenic_tel = #{record.scenicTel,jdbcType=VARCHAR},
+      scenic_image = #{record.scenicImage,jdbcType=VARCHAR},
+      tid = #{record.tid,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=TINYINT},
+      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      temp1 = #{record.temp1,jdbcType=VARCHAR},
+      temp2 = #{record.temp2,jdbcType=VARCHAR},
+      temp3 = #{record.temp3,jdbcType=VARCHAR},
+      scenic_name = #{record.scenicName,jdbcType=LONGVARCHAR},
+      scenic_intro = #{record.scenicIntro,jdbcType=LONGVARCHAR},
+      scenic_address = #{record.scenicAddress,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_scenic
+    set id = #{record.id,jdbcType=BIGINT},
+      scenic_linkman = #{record.scenicLinkman,jdbcType=VARCHAR},
+      scenic_tel = #{record.scenicTel,jdbcType=VARCHAR},
+      scenic_image = #{record.scenicImage,jdbcType=VARCHAR},
+      tid = #{record.tid,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=TINYINT},
+      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      temp1 = #{record.temp1,jdbcType=VARCHAR},
+      temp2 = #{record.temp2,jdbcType=VARCHAR},
+      temp3 = #{record.temp3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tp.trip.pojo.po.TbScenicWithBLOBs" >
+    update tb_scenic
+    <set >
+      <if test="scenicLinkman != null" >
+        scenic_linkman = #{scenicLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicTel != null" >
+        scenic_tel = #{scenicTel,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicImage != null" >
+        scenic_image = #{scenicImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="temp1 != null" >
+        temp1 = #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        temp2 = #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        temp3 = #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicName != null" >
+        scenic_name = #{scenicName,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="scenicIntro != null" >
+        scenic_intro = #{scenicIntro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="scenicAddress != null" >
+        scenic_address = #{scenicAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tp.trip.pojo.po.TbScenicWithBLOBs" >
+    update tb_scenic
+    set scenic_linkman = #{scenicLinkman,jdbcType=VARCHAR},
+      scenic_tel = #{scenicTel,jdbcType=VARCHAR},
+      scenic_image = #{scenicImage,jdbcType=VARCHAR},
+      tid = #{tid,jdbcType=INTEGER},
+      state = #{state,jdbcType=TINYINT},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      temp1 = #{temp1,jdbcType=VARCHAR},
+      temp2 = #{temp2,jdbcType=VARCHAR},
+      temp3 = #{temp3,jdbcType=VARCHAR},
+      scenic_name = #{scenicName,jdbcType=LONGVARCHAR},
+      scenic_intro = #{scenicIntro,jdbcType=LONGVARCHAR},
+      scenic_address = #{scenicAddress,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tp.trip.pojo.po.TbScenic" >
+    update tb_scenic
+    set scenic_linkman = #{scenicLinkman,jdbcType=VARCHAR},
+      scenic_tel = #{scenicTel,jdbcType=VARCHAR},
+      scenic_image = #{scenicImage,jdbcType=VARCHAR},
+      tid = #{tid,jdbcType=INTEGER},
+      state = #{state,jdbcType=TINYINT},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      temp1 = #{temp1,jdbcType=VARCHAR},
+      temp2 = #{temp2,jdbcType=VARCHAR},
+      temp3 = #{temp3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

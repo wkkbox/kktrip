@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="trip-common" />
+        <module name="trip-manager-dao" />
+        <module name="trip-manager-interface" />
+        <module name="trip-manager-pojo" />
+        <module name="trip-manager-service" />
+        <module name="trip-manager-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="trip-common" target="1.8" />
+      <module name="trip-manager" target="1.8" />
+      <module name="trip-manager-dao" target="1.8" />
+      <module name="trip-manager-interface" target="1.8" />
+      <module name="trip-manager-pojo" target="1.8" />
+      <module name="trip-manager-service" target="1.8" />
+      <module name="trip-manager-web" target="1.8" />
+      <module name="trip-parent" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

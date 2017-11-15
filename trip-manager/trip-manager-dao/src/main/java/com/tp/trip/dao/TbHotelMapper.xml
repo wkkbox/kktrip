@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tp.trip.dao.TbHotelMapper" >
+  <resultMap id="BaseResultMap" type="com.tp.trip.pojo.po.TbHotel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="hotel_name" property="hotelName" jdbcType="VARCHAR" />
+    <result column="hotelType" property="hoteltype" jdbcType="TINYINT" />
+    <result column="hotel_linkman" property="hotelLinkman" jdbcType="VARCHAR" />
+    <result column="hotel_tel" property="hotelTel" jdbcType="VARCHAR" />
+    <result column="hotel_image" property="hotelImage" jdbcType="VARCHAR" />
+    <result column="temp1" property="temp1" jdbcType="VARCHAR" />
+    <result column="temp2" property="temp2" jdbcType="VARCHAR" />
+    <result column="temp3" property="temp3" jdbcType="VARCHAR" />
+    <result column="temp4" property="temp4" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tp.trip.pojo.po.TbHotel" extends="BaseResultMap" >
+    <result column="hotel_address" property="hotelAddress" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, hotel_name, hotelType, hotel_linkman, hotel_tel, hotel_image, temp1, temp2, temp3, 
+    temp4
+  </sql>
+  <sql id="Blob_Column_List" >
+    hotel_address
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.tp.trip.pojo.po.TbHotelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_hotel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tp.trip.pojo.po.TbHotelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_hotel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_hotel
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_hotel
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tp.trip.pojo.po.TbHotelExample" >
+    delete from tb_hotel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tp.trip.pojo.po.TbHotel" >
+    insert into tb_hotel (id, hotel_name, hotelType, 
+      hotel_linkman, hotel_tel, hotel_image, 
+      temp1, temp2, temp3, 
+      temp4, hotel_address)
+    values (#{id,jdbcType=BIGINT}, #{hotelName,jdbcType=VARCHAR}, #{hoteltype,jdbcType=TINYINT}, 
+      #{hotelLinkman,jdbcType=VARCHAR}, #{hotelTel,jdbcType=VARCHAR}, #{hotelImage,jdbcType=VARCHAR}, 
+      #{temp1,jdbcType=VARCHAR}, #{temp2,jdbcType=VARCHAR}, #{temp3,jdbcType=VARCHAR}, 
+      #{temp4,jdbcType=VARCHAR}, #{hotelAddress,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tp.trip.pojo.po.TbHotel" >
+    insert into tb_hotel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hotelName != null" >
+        hotel_name,
+      </if>
+      <if test="hoteltype != null" >
+        hotelType,
+      </if>
+      <if test="hotelLinkman != null" >
+        hotel_linkman,
+      </if>
+      <if test="hotelTel != null" >
+        hotel_tel,
+      </if>
+      <if test="hotelImage != null" >
+        hotel_image,
+      </if>
+      <if test="temp1 != null" >
+        temp1,
+      </if>
+      <if test="temp2 != null" >
+        temp2,
+      </if>
+      <if test="temp3 != null" >
+        temp3,
+      </if>
+      <if test="temp4 != null" >
+        temp4,
+      </if>
+      <if test="hotelAddress != null" >
+        hotel_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="hotelName != null" >
+        #{hotelName,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteltype != null" >
+        #{hoteltype,jdbcType=TINYINT},
+      </if>
+      <if test="hotelLinkman != null" >
+        #{hotelLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelTel != null" >
+        #{hotelTel,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelImage != null" >
+        #{hotelImage,jdbcType=VARCHAR},
+      </if>
+      <if test="temp1 != null" >
+        #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        #{temp4,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelAddress != null" >
+        #{hotelAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tp.trip.pojo.po.TbHotelExample" resultType="java.lang.Integer" >
+    select count(*) from tb_hotel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_hotel
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.hotelName != null" >
+        hotel_name = #{record.hotelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hoteltype != null" >
+        hotelType = #{record.hoteltype,jdbcType=TINYINT},
+      </if>
+      <if test="record.hotelLinkman != null" >
+        hotel_linkman = #{record.hotelLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotelTel != null" >
+        hotel_tel = #{record.hotelTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotelImage != null" >
+        hotel_image = #{record.hotelImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temp1 != null" >
+        temp1 = #{record.temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temp2 != null" >
+        temp2 = #{record.temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temp3 != null" >
+        temp3 = #{record.temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temp4 != null" >
+        temp4 = #{record.temp4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotelAddress != null" >
+        hotel_address = #{record.hotelAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_hotel
+    set id = #{record.id,jdbcType=BIGINT},
+      hotel_name = #{record.hotelName,jdbcType=VARCHAR},
+      hotelType = #{record.hoteltype,jdbcType=TINYINT},
+      hotel_linkman = #{record.hotelLinkman,jdbcType=VARCHAR},
+      hotel_tel = #{record.hotelTel,jdbcType=VARCHAR},
+      hotel_image = #{record.hotelImage,jdbcType=VARCHAR},
+      temp1 = #{record.temp1,jdbcType=VARCHAR},
+      temp2 = #{record.temp2,jdbcType=VARCHAR},
+      temp3 = #{record.temp3,jdbcType=VARCHAR},
+      temp4 = #{record.temp4,jdbcType=VARCHAR},
+      hotel_address = #{record.hotelAddress,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_hotel
+    set id = #{record.id,jdbcType=BIGINT},
+      hotel_name = #{record.hotelName,jdbcType=VARCHAR},
+      hotelType = #{record.hoteltype,jdbcType=TINYINT},
+      hotel_linkman = #{record.hotelLinkman,jdbcType=VARCHAR},
+      hotel_tel = #{record.hotelTel,jdbcType=VARCHAR},
+      hotel_image = #{record.hotelImage,jdbcType=VARCHAR},
+      temp1 = #{record.temp1,jdbcType=VARCHAR},
+      temp2 = #{record.temp2,jdbcType=VARCHAR},
+      temp3 = #{record.temp3,jdbcType=VARCHAR},
+      temp4 = #{record.temp4,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tp.trip.pojo.po.TbHotel" >
+    update tb_hotel
+    <set >
+      <if test="hotelName != null" >
+        hotel_name = #{hotelName,jdbcType=VARCHAR},
+      </if>
+      <if test="hoteltype != null" >
+        hotelType = #{hoteltype,jdbcType=TINYINT},
+      </if>
+      <if test="hotelLinkman != null" >
+        hotel_linkman = #{hotelLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelTel != null" >
+        hotel_tel = #{hotelTel,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelImage != null" >
+        hotel_image = #{hotelImage,jdbcType=VARCHAR},
+      </if>
+      <if test="temp1 != null" >
+        temp1 = #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        temp2 = #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        temp3 = #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        temp4 = #{temp4,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelAddress != null" >
+        hotel_address = #{hotelAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tp.trip.pojo.po.TbHotel" >
+    update tb_hotel
+    set hotel_name = #{hotelName,jdbcType=VARCHAR},
+      hotelType = #{hoteltype,jdbcType=TINYINT},
+      hotel_linkman = #{hotelLinkman,jdbcType=VARCHAR},
+      hotel_tel = #{hotelTel,jdbcType=VARCHAR},
+      hotel_image = #{hotelImage,jdbcType=VARCHAR},
+      temp1 = #{temp1,jdbcType=VARCHAR},
+      temp2 = #{temp2,jdbcType=VARCHAR},
+      temp3 = #{temp3,jdbcType=VARCHAR},
+      temp4 = #{temp4,jdbcType=VARCHAR},
+      hotel_address = #{hotelAddress,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tp.trip.pojo.po.TbHotel" >
+    update tb_hotel
+    set hotel_name = #{hotelName,jdbcType=VARCHAR},
+      hotelType = #{hoteltype,jdbcType=TINYINT},
+      hotel_linkman = #{hotelLinkman,jdbcType=VARCHAR},
+      hotel_tel = #{hotelTel,jdbcType=VARCHAR},
+      hotel_image = #{hotelImage,jdbcType=VARCHAR},
+      temp1 = #{temp1,jdbcType=VARCHAR},
+      temp2 = #{temp2,jdbcType=VARCHAR},
+      temp3 = #{temp3,jdbcType=VARCHAR},
+      temp4 = #{temp4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

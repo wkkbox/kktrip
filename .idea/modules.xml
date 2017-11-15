@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/trip-common/trip-common.iml" filepath="$PROJECT_DIR$/trip-common/trip-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trip-manager/trip-manager.iml" filepath="$PROJECT_DIR$/trip-manager/trip-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trip-manager/trip-manager-dao/trip-manager-dao.iml" filepath="$PROJECT_DIR$/trip-manager/trip-manager-dao/trip-manager-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trip-manager/trip-manager-interface/trip-manager-interface.iml" filepath="$PROJECT_DIR$/trip-manager/trip-manager-interface/trip-manager-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trip-manager/trip-manager-pojo/trip-manager-pojo.iml" filepath="$PROJECT_DIR$/trip-manager/trip-manager-pojo/trip-manager-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trip-manager/trip-manager-service/trip-manager-service.iml" filepath="$PROJECT_DIR$/trip-manager/trip-manager-service/trip-manager-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trip-manager/trip-manager-web/trip-manager-web.iml" filepath="$PROJECT_DIR$/trip-manager/trip-manager-web/trip-manager-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trip-parent/trip-parent.iml" filepath="$PROJECT_DIR$/trip-parent/trip-parent.iml" />
+    </modules>
+  </component>
+</project>
