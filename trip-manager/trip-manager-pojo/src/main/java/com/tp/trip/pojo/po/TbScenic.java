@@ -21,7 +21,7 @@ public class TbScenic {
 
     private Long uid;
 
-    private String temp2;
+    private Double price;
 
     private String temp3;
 
@@ -97,12 +97,12 @@ public class TbScenic {
         this.uid = uid;
     }
 
-    public String getTemp2() {
-        return temp2;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setTemp2(String temp2) {
-        this.temp2 = temp2 == null ? null : temp2.trim();
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getTemp3() {
