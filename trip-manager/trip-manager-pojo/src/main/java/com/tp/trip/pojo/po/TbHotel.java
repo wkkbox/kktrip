@@ -13,11 +13,11 @@ public class TbHotel {
 
     private String hotelImage;
 
-    private String temp1;
+    private Long uid;
 
-    private String temp2;
+    private Double price;
 
-    private String temp3;
+    private Byte state;
 
     private String temp4;
 
@@ -71,28 +71,28 @@ public class TbHotel {
         this.hotelImage = hotelImage == null ? null : hotelImage.trim();
     }
 
-    public String getTemp1() {
-        return temp1;
+    public Long getUid() {
+        return uid;
     }
 
-    public void setTemp1(String temp1) {
-        this.temp1 = temp1 == null ? null : temp1.trim();
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
 
-    public String getTemp2() {
-        return temp2;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setTemp2(String temp2) {
-        this.temp2 = temp2 == null ? null : temp2.trim();
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public String getTemp3() {
-        return temp3;
+    public Byte getState() {
+        return state;
     }
 
-    public void setTemp3(String temp3) {
-        this.temp3 = temp3 == null ? null : temp3.trim();
+    public void setState(Byte state) {
+        this.state = state;
     }
 
     public String getTemp4() {

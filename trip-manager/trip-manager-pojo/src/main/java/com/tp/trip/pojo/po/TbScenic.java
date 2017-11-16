@@ -19,7 +19,7 @@ public class TbScenic {
 
     private Date updateTime;
 
-    private String temp1;
+    private Long uid;
 
     private String temp2;
 
@@ -89,12 +89,12 @@ public class TbScenic {
         this.updateTime = updateTime;
     }
 
-    public String getTemp1() {
-        return temp1;
+    public Long getUid() {
+        return uid;
     }
 
-    public void setTemp1(String temp1) {
-        this.temp1 = temp1 == null ? null : temp1.trim();
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
 
     public String getTemp2() {

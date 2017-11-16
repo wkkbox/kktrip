@@ -10,7 +10,7 @@
     <result column="state" property="state" jdbcType="TINYINT" />
     <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="temp1" property="temp1" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
     <result column="temp2" property="temp2" jdbcType="VARCHAR" />
     <result column="temp3" property="temp3" jdbcType="VARCHAR" />
   </resultMap>
@@ -79,7 +79,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, scenic_linkman, scenic_tel, scenic_image, tid, state, created_time, update_time, 
-    temp1, temp2, temp3
+    uid, temp2, temp3
   </sql>
   <sql id="Blob_Column_List" >
     scenic_name, scenic_intro, scenic_address
@@ -135,12 +135,12 @@
   <insert id="insert" parameterType="com.tp.trip.pojo.po.TbScenicWithBLOBs" >
     insert into tb_scenic (id, scenic_linkman, scenic_tel, 
       scenic_image, tid, state, 
-      created_time, update_time, temp1, 
+      created_time, update_time, uid, 
       temp2, temp3, scenic_name, 
       scenic_intro, scenic_address)
     values (#{id,jdbcType=BIGINT}, #{scenicLinkman,jdbcType=VARCHAR}, #{scenicTel,jdbcType=VARCHAR}, 
       #{scenicImage,jdbcType=VARCHAR}, #{tid,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}, 
-      #{createdTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{temp1,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{uid,jdbcType=BIGINT}, 
       #{temp2,jdbcType=VARCHAR}, #{temp3,jdbcType=VARCHAR}, #{scenicName,jdbcType=LONGVARCHAR}, 
       #{scenicIntro,jdbcType=LONGVARCHAR}, #{scenicAddress,jdbcType=LONGVARCHAR})
   </insert>
@@ -171,8 +171,8 @@
       <if test="updateTime != null" >
         update_time,
       </if>
-      <if test="temp1 != null" >
-        temp1,
+      <if test="uid != null" >
+        uid,
       </if>
       <if test="temp2 != null" >
         temp2,
@@ -215,8 +215,8 @@
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="temp1 != null" >
-        #{temp1,jdbcType=VARCHAR},
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
       </if>
       <if test="temp2 != null" >
         #{temp2,jdbcType=VARCHAR},
@@ -268,8 +268,8 @@
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.temp1 != null" >
-        temp1 = #{record.temp1,jdbcType=VARCHAR},
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=BIGINT},
       </if>
       <if test="record.temp2 != null" >
         temp2 = #{record.temp2,jdbcType=VARCHAR},
@@ -301,7 +301,7 @@
       state = #{record.state,jdbcType=TINYINT},
       created_time = #{record.createdTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      temp1 = #{record.temp1,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=BIGINT},
       temp2 = #{record.temp2,jdbcType=VARCHAR},
       temp3 = #{record.temp3,jdbcType=VARCHAR},
       scenic_name = #{record.scenicName,jdbcType=LONGVARCHAR},
@@ -321,7 +321,7 @@
       state = #{record.state,jdbcType=TINYINT},
       created_time = #{record.createdTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      temp1 = #{record.temp1,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=BIGINT},
       temp2 = #{record.temp2,jdbcType=VARCHAR},
       temp3 = #{record.temp3,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -352,8 +352,8 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="temp1 != null" >
-        temp1 = #{temp1,jdbcType=VARCHAR},
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=BIGINT},
       </if>
       <if test="temp2 != null" >
         temp2 = #{temp2,jdbcType=VARCHAR},
@@ -382,7 +382,7 @@
       state = #{state,jdbcType=TINYINT},
       created_time = #{createdTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      temp1 = #{temp1,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=BIGINT},
       temp2 = #{temp2,jdbcType=VARCHAR},
       temp3 = #{temp3,jdbcType=VARCHAR},
       scenic_name = #{scenicName,jdbcType=LONGVARCHAR},
@@ -399,7 +399,7 @@
       state = #{state,jdbcType=TINYINT},
       created_time = #{createdTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      temp1 = #{temp1,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=BIGINT},
       temp2 = #{temp2,jdbcType=VARCHAR},
       temp3 = #{temp3,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}

@@ -8,9 +8,9 @@
     <result column="hotel_linkman" property="hotelLinkman" jdbcType="VARCHAR" />
     <result column="hotel_tel" property="hotelTel" jdbcType="VARCHAR" />
     <result column="hotel_image" property="hotelImage" jdbcType="VARCHAR" />
-    <result column="temp1" property="temp1" jdbcType="VARCHAR" />
-    <result column="temp2" property="temp2" jdbcType="VARCHAR" />
-    <result column="temp3" property="temp3" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="state" property="state" jdbcType="TINYINT" />
     <result column="temp4" property="temp4" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.tp.trip.pojo.po.TbHotel" extends="BaseResultMap" >
@@ -75,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, hotel_name, hotelType, hotel_linkman, hotel_tel, hotel_image, temp1, temp2, temp3, 
+    id, hotel_name, hotelType, hotel_linkman, hotel_tel, hotel_image, uid, price, state, 
     temp4
   </sql>
   <sql id="Blob_Column_List" >
@@ -132,12 +132,12 @@
   <insert id="insert" parameterType="com.tp.trip.pojo.po.TbHotel" >
     insert into tb_hotel (id, hotel_name, hotelType, 
       hotel_linkman, hotel_tel, hotel_image, 
-      temp1, temp2, temp3, 
-      temp4, hotel_address)
+      uid, price, state, temp4, 
+      hotel_address)
     values (#{id,jdbcType=BIGINT}, #{hotelName,jdbcType=VARCHAR}, #{hoteltype,jdbcType=TINYINT}, 
       #{hotelLinkman,jdbcType=VARCHAR}, #{hotelTel,jdbcType=VARCHAR}, #{hotelImage,jdbcType=VARCHAR}, 
-      #{temp1,jdbcType=VARCHAR}, #{temp2,jdbcType=VARCHAR}, #{temp3,jdbcType=VARCHAR}, 
-      #{temp4,jdbcType=VARCHAR}, #{hotelAddress,jdbcType=LONGVARCHAR})
+      #{uid,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}, #{state,jdbcType=TINYINT}, #{temp4,jdbcType=VARCHAR}, 
+      #{hotelAddress,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.tp.trip.pojo.po.TbHotel" >
     insert into tb_hotel
@@ -160,14 +160,14 @@
       <if test="hotelImage != null" >
         hotel_image,
       </if>
-      <if test="temp1 != null" >
-        temp1,
+      <if test="uid != null" >
+        uid,
       </if>
-      <if test="temp2 != null" >
-        temp2,
+      <if test="price != null" >
+        price,
       </if>
-      <if test="temp3 != null" >
-        temp3,
+      <if test="state != null" >
+        state,
       </if>
       <if test="temp4 != null" >
         temp4,
@@ -195,14 +195,14 @@
       <if test="hotelImage != null" >
         #{hotelImage,jdbcType=VARCHAR},
       </if>
-      <if test="temp1 != null" >
-        #{temp1,jdbcType=VARCHAR},
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
       </if>
-      <if test="temp2 != null" >
-        #{temp2,jdbcType=VARCHAR},
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
       </if>
-      <if test="temp3 != null" >
-        #{temp3,jdbcType=VARCHAR},
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
       </if>
       <if test="temp4 != null" >
         #{temp4,jdbcType=VARCHAR},
@@ -239,14 +239,14 @@
       <if test="record.hotelImage != null" >
         hotel_image = #{record.hotelImage,jdbcType=VARCHAR},
       </if>
-      <if test="record.temp1 != null" >
-        temp1 = #{record.temp1,jdbcType=VARCHAR},
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=BIGINT},
       </if>
-      <if test="record.temp2 != null" >
-        temp2 = #{record.temp2,jdbcType=VARCHAR},
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
       </if>
-      <if test="record.temp3 != null" >
-        temp3 = #{record.temp3,jdbcType=VARCHAR},
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=TINYINT},
       </if>
       <if test="record.temp4 != null" >
         temp4 = #{record.temp4,jdbcType=VARCHAR},
@@ -267,9 +267,9 @@
       hotel_linkman = #{record.hotelLinkman,jdbcType=VARCHAR},
       hotel_tel = #{record.hotelTel,jdbcType=VARCHAR},
       hotel_image = #{record.hotelImage,jdbcType=VARCHAR},
-      temp1 = #{record.temp1,jdbcType=VARCHAR},
-      temp2 = #{record.temp2,jdbcType=VARCHAR},
-      temp3 = #{record.temp3,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=BIGINT},
+      price = #{record.price,jdbcType=DOUBLE},
+      state = #{record.state,jdbcType=TINYINT},
       temp4 = #{record.temp4,jdbcType=VARCHAR},
       hotel_address = #{record.hotelAddress,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
@@ -284,9 +284,9 @@
       hotel_linkman = #{record.hotelLinkman,jdbcType=VARCHAR},
       hotel_tel = #{record.hotelTel,jdbcType=VARCHAR},
       hotel_image = #{record.hotelImage,jdbcType=VARCHAR},
-      temp1 = #{record.temp1,jdbcType=VARCHAR},
-      temp2 = #{record.temp2,jdbcType=VARCHAR},
-      temp3 = #{record.temp3,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=BIGINT},
+      price = #{record.price,jdbcType=DOUBLE},
+      state = #{record.state,jdbcType=TINYINT},
       temp4 = #{record.temp4,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -310,14 +310,14 @@
       <if test="hotelImage != null" >
         hotel_image = #{hotelImage,jdbcType=VARCHAR},
       </if>
-      <if test="temp1 != null" >
-        temp1 = #{temp1,jdbcType=VARCHAR},
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=BIGINT},
       </if>
-      <if test="temp2 != null" >
-        temp2 = #{temp2,jdbcType=VARCHAR},
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
       </if>
-      <if test="temp3 != null" >
-        temp3 = #{temp3,jdbcType=VARCHAR},
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
       </if>
       <if test="temp4 != null" >
         temp4 = #{temp4,jdbcType=VARCHAR},
@@ -335,9 +335,9 @@
       hotel_linkman = #{hotelLinkman,jdbcType=VARCHAR},
       hotel_tel = #{hotelTel,jdbcType=VARCHAR},
       hotel_image = #{hotelImage,jdbcType=VARCHAR},
-      temp1 = #{temp1,jdbcType=VARCHAR},
-      temp2 = #{temp2,jdbcType=VARCHAR},
-      temp3 = #{temp3,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=BIGINT},
+      price = #{price,jdbcType=DOUBLE},
+      state = #{state,jdbcType=TINYINT},
       temp4 = #{temp4,jdbcType=VARCHAR},
       hotel_address = #{hotelAddress,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
@@ -349,9 +349,9 @@
       hotel_linkman = #{hotelLinkman,jdbcType=VARCHAR},
       hotel_tel = #{hotelTel,jdbcType=VARCHAR},
       hotel_image = #{hotelImage,jdbcType=VARCHAR},
-      temp1 = #{temp1,jdbcType=VARCHAR},
-      temp2 = #{temp2,jdbcType=VARCHAR},
-      temp3 = #{temp3,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=BIGINT},
+      price = #{price,jdbcType=DOUBLE},
+      state = #{state,jdbcType=TINYINT},
       temp4 = #{temp4,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>

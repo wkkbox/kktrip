@@ -504,213 +504,183 @@ public class TbHotelExample {
             return (Criteria) this;
         }
 
-        public Criteria andTemp1IsNull() {
-            addCriterion("temp1 is null");
+        public Criteria andUidIsNull() {
+            addCriterion("uid is null");
             return (Criteria) this;
         }
 
-        public Criteria andTemp1IsNotNull() {
-            addCriterion("temp1 is not null");
+        public Criteria andUidIsNotNull() {
+            addCriterion("uid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTemp1EqualTo(String value) {
-            addCriterion("temp1 =", value, "temp1");
+        public Criteria andUidEqualTo(Long value) {
+            addCriterion("uid =", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andTemp1NotEqualTo(String value) {
-            addCriterion("temp1 <>", value, "temp1");
+        public Criteria andUidNotEqualTo(Long value) {
+            addCriterion("uid <>", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andTemp1GreaterThan(String value) {
-            addCriterion("temp1 >", value, "temp1");
+        public Criteria andUidGreaterThan(Long value) {
+            addCriterion("uid >", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andTemp1GreaterThanOrEqualTo(String value) {
-            addCriterion("temp1 >=", value, "temp1");
+        public Criteria andUidGreaterThanOrEqualTo(Long value) {
+            addCriterion("uid >=", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andTemp1LessThan(String value) {
-            addCriterion("temp1 <", value, "temp1");
+        public Criteria andUidLessThan(Long value) {
+            addCriterion("uid <", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andTemp1LessThanOrEqualTo(String value) {
-            addCriterion("temp1 <=", value, "temp1");
+        public Criteria andUidLessThanOrEqualTo(Long value) {
+            addCriterion("uid <=", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andTemp1Like(String value) {
-            addCriterion("temp1 like", value, "temp1");
+        public Criteria andUidIn(List<Long> values) {
+            addCriterion("uid in", values, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andTemp1NotLike(String value) {
-            addCriterion("temp1 not like", value, "temp1");
+        public Criteria andUidNotIn(List<Long> values) {
+            addCriterion("uid not in", values, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andTemp1In(List<String> values) {
-            addCriterion("temp1 in", values, "temp1");
+        public Criteria andUidBetween(Long value1, Long value2) {
+            addCriterion("uid between", value1, value2, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andTemp1NotIn(List<String> values) {
-            addCriterion("temp1 not in", values, "temp1");
+        public Criteria andUidNotBetween(Long value1, Long value2) {
+            addCriterion("uid not between", value1, value2, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andTemp1Between(String value1, String value2) {
-            addCriterion("temp1 between", value1, value2, "temp1");
+        public Criteria andPriceIsNull() {
+            addCriterion("price is null");
             return (Criteria) this;
         }
 
-        public Criteria andTemp1NotBetween(String value1, String value2) {
-            addCriterion("temp1 not between", value1, value2, "temp1");
+        public Criteria andPriceIsNotNull() {
+            addCriterion("price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2IsNull() {
-            addCriterion("temp2 is null");
+        public Criteria andPriceEqualTo(Double value) {
+            addCriterion("price =", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2IsNotNull() {
-            addCriterion("temp2 is not null");
+        public Criteria andPriceNotEqualTo(Double value) {
+            addCriterion("price <>", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2EqualTo(String value) {
-            addCriterion("temp2 =", value, "temp2");
+        public Criteria andPriceGreaterThan(Double value) {
+            addCriterion("price >", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2NotEqualTo(String value) {
-            addCriterion("temp2 <>", value, "temp2");
+        public Criteria andPriceGreaterThanOrEqualTo(Double value) {
+            addCriterion("price >=", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2GreaterThan(String value) {
-            addCriterion("temp2 >", value, "temp2");
+        public Criteria andPriceLessThan(Double value) {
+            addCriterion("price <", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2GreaterThanOrEqualTo(String value) {
-            addCriterion("temp2 >=", value, "temp2");
+        public Criteria andPriceLessThanOrEqualTo(Double value) {
+            addCriterion("price <=", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2LessThan(String value) {
-            addCriterion("temp2 <", value, "temp2");
+        public Criteria andPriceIn(List<Double> values) {
+            addCriterion("price in", values, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2LessThanOrEqualTo(String value) {
-            addCriterion("temp2 <=", value, "temp2");
+        public Criteria andPriceNotIn(List<Double> values) {
+            addCriterion("price not in", values, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2Like(String value) {
-            addCriterion("temp2 like", value, "temp2");
+        public Criteria andPriceBetween(Double value1, Double value2) {
+            addCriterion("price between", value1, value2, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2NotLike(String value) {
-            addCriterion("temp2 not like", value, "temp2");
+        public Criteria andPriceNotBetween(Double value1, Double value2) {
+            addCriterion("price not between", value1, value2, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2In(List<String> values) {
-            addCriterion("temp2 in", values, "temp2");
+        public Criteria andStateIsNull() {
+            addCriterion("state is null");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2NotIn(List<String> values) {
-            addCriterion("temp2 not in", values, "temp2");
+        public Criteria andStateIsNotNull() {
+            addCriterion("state is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2Between(String value1, String value2) {
-            addCriterion("temp2 between", value1, value2, "temp2");
+        public Criteria andStateEqualTo(Byte value) {
+            addCriterion("state =", value, "state");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2NotBetween(String value1, String value2) {
-            addCriterion("temp2 not between", value1, value2, "temp2");
+        public Criteria andStateNotEqualTo(Byte value) {
+            addCriterion("state <>", value, "state");
             return (Criteria) this;
         }
 
-        public Criteria andTemp3IsNull() {
-            addCriterion("temp3 is null");
+        public Criteria andStateGreaterThan(Byte value) {
+            addCriterion("state >", value, "state");
             return (Criteria) this;
         }
 
-        public Criteria andTemp3IsNotNull() {
-            addCriterion("temp3 is not null");
+        public Criteria andStateGreaterThanOrEqualTo(Byte value) {
+            addCriterion("state >=", value, "state");
             return (Criteria) this;
         }
 
-        public Criteria andTemp3EqualTo(String value) {
-            addCriterion("temp3 =", value, "temp3");
+        public Criteria andStateLessThan(Byte value) {
+            addCriterion("state <", value, "state");
             return (Criteria) this;
         }
 
-        public Criteria andTemp3NotEqualTo(String value) {
-            addCriterion("temp3 <>", value, "temp3");
+        public Criteria andStateLessThanOrEqualTo(Byte value) {
+            addCriterion("state <=", value, "state");
             return (Criteria) this;
         }
 
-        public Criteria andTemp3GreaterThan(String value) {
-            addCriterion("temp3 >", value, "temp3");
+        public Criteria andStateIn(List<Byte> values) {
+            addCriterion("state in", values, "state");
             return (Criteria) this;
         }
 
-        public Criteria andTemp3GreaterThanOrEqualTo(String value) {
-            addCriterion("temp3 >=", value, "temp3");
+        public Criteria andStateNotIn(List<Byte> values) {
+            addCriterion("state not in", values, "state");
             return (Criteria) this;
         }
 
-        public Criteria andTemp3LessThan(String value) {
-            addCriterion("temp3 <", value, "temp3");
+        public Criteria andStateBetween(Byte value1, Byte value2) {
+            addCriterion("state between", value1, value2, "state");
             return (Criteria) this;
         }
 
-        public Criteria andTemp3LessThanOrEqualTo(String value) {
-            addCriterion("temp3 <=", value, "temp3");
-            return (Criteria) this;
-        }
-
-        public Criteria andTemp3Like(String value) {
-            addCriterion("temp3 like", value, "temp3");
-            return (Criteria) this;
-        }
-
-        public Criteria andTemp3NotLike(String value) {
-            addCriterion("temp3 not like", value, "temp3");
-            return (Criteria) this;
-        }
-
-        public Criteria andTemp3In(List<String> values) {
-            addCriterion("temp3 in", values, "temp3");
-            return (Criteria) this;
-        }
-
-        public Criteria andTemp3NotIn(List<String> values) {
-            addCriterion("temp3 not in", values, "temp3");
-            return (Criteria) this;
-        }
-
-        public Criteria andTemp3Between(String value1, String value2) {
-            addCriterion("temp3 between", value1, value2, "temp3");
-            return (Criteria) this;
-        }
-
-        public Criteria andTemp3NotBetween(String value1, String value2) {
-            addCriterion("temp3 not between", value1, value2, "temp3");
+        public Criteria andStateNotBetween(Byte value1, Byte value2) {
+            addCriterion("state not between", value1, value2, "state");
             return (Criteria) this;
         }
 
