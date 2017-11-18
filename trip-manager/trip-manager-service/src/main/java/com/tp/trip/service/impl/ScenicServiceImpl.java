@@ -47,7 +47,7 @@ public class ScenicServiceImpl implements ScenicService{
     }
 
     @Override
-    public int updateBatch(List<Byte> ids, String batch) {
+    public int updateBatch(List ids, String batch) {
         TbScenicExample example=new TbScenicExample();
         TbScenicExample.Criteria criteria = example.createCriteria();
         criteria.andStateIn(ids);
