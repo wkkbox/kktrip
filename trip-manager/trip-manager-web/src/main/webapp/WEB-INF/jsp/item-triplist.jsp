@@ -3,9 +3,9 @@
 <div id="toolbar">
     <div style="padding: 5px; background-color: #fff;">
         <label>景点名称：</label>
-        <input class="easyui-textbox" type="text" id="title">
+        <input class="easyui-textbox" type="text" id="scenicName">
         <label>景点状态：</label>
-        <select id="status" class="easyui-combobox">
+        <select id="state" class="easyui-combobox">
             <option value="0">全部</option>
             <option value="1">正常</option>
             <option value="2">下架</option>
@@ -18,15 +18,39 @@
     <div>
         <button onclick="add()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</button>
         <button onclick="edit()" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</button>
-        <button onclick="remove()" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</button>
-        <button onclick="down()" class="easyui-linkbutton" data-options="iconCls:'icon-down',plain:true">下架</button>
-        <button onclick="up()" class="easyui-linkbutton" data-options="iconCls:'icon-up',plain:true">上架</button>
+        <button onclick="scenicBatch('batchRemove')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</button>
+        <button onclick="scenicBatch('batchDown')" class="easyui-linkbutton" data-options="iconCls:'icon-down',plain:true">下架</button>
+        <button onclick="scenicBatch('batchUp')" class="easyui-linkbutton" data-options="iconCls:'icon-up',plain:true">上架</button>
     </div>
 </div>
 <table id="dg"></table>
 <script>
+    function scenicBatch(batch) {
+        var selection= $('#dg').datagrid('getSelections');
+        if (selection.length==0){
+            $.messager.alert('提示', '请至少选中一条记录！');
+            return;
+        }
+        if(batch=="batchRemove"){
+            $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
+                if (r==false) {
+                    return;
+                }
+            })
+        }
+        var ids = [];
+        for(var i=0;i<selection.length;i++){
+            ids.push(selection[i].id);
+        }
+        $.ajax({
+            url:"scenic/"+batch+"",
+            data:{"ids[]":ids},
+            success:function (data) {
+                $("#dg").datagrid("reload");
+            }
+        })
+    }
 
-    //模糊查询
     function searchForm(){
         $('#dg').datagrid('load',{
             title:$('#title').val(),
@@ -35,67 +59,29 @@
     }
 
 
+    //模糊查询
+    function searchForm(){
+        $('#dg').datagrid('load',{
+            scenicName:$('#scenicName').val(),
+            state:$('#state').combobox('getValue')
+        });
+    }
+
+
     function add() {
-        tktrip.addTabs('新增酒店', 'item-add');
+        tktrip.addTabs('新增景点', 'item-add');
     }
 
     function edit() {
         console.log('edit');
     }
 
-    function remove() {
-        var selections = $('#dg').datagrid('getSelections');
-        console.log(selections);
-        if (selections.length == 0) {
-            //客户没有选择记录
-            $.messager.alert('提示', '请至少选中一条记录！');
-            return;
-        }
-        //至少选中了一条记录
-        //确认框，第一个参数为标题，第二个参数确认框的提示内容，第三参数是一个确认函数
-        //function(r) 如果用户点击的是"确定"，那么r=true
-        $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
-            if (r) {
-                //为了存放id的集合
-                var ids = [];
-                //遍历选中的记录，将记录的id存放到js数组中
-                for (var i = 0; i < selections.length; i++) {
-                    ids.push(selections[i].id);
-                }
-                //把ids异步提交到后台
-                $.post(
-                    //url:请求后台的哪个地址来进行处理，相当于url,String类型
-                    'items/batch',
-                    //data:从前台提交哪些数据给后台处理，相当于data，Object类型
-                    {'ids[]': ids},
-                    //callback:后台处理成功的回调函数，相当于success，function类型
-                    function (data) {
-                        $('#dg').datagrid('reload');
-                    },
-                    //dataType:返回的数据类型，如：json，String类型
-                    'json'
-                );
-
-            }
-        });
-    }
-
-    function down() {
-        console.log('down');
-    }
-
-    function up() {
-        console.log('up');
-    }
-
     //初始化数据表格
     $('#dg').datagrid({
-        //允许多列排序
-        multiSort: true,
         //将工具栏添加到数据表格中
         toolbar: '#toolbar',
         //请求远程服务器上的URL
-        url: 'items',
+        url: 'scenics',
         //隔行变色，斑马线效果
         striped: true,
         //添加分页工具栏
@@ -113,18 +99,13 @@
             //field title width列属性
             {field: 'ck', checkbox: true},
             {field: 'id', title: '景点编号', width: 100, sortable: true},
-            {field: 'scenicName', title: '景点名称', width: 100, sortable: true},/*scenicname*/
+            {field: 'scenicName', title: '景点名称', width: 100},/*scenicname*/
             {field: 'scenicAddress', title: '景点地址', width: 100},/*scenic_address*/
             {field: 'scenicIntro', title: '景点介绍', width: 100},/*scenicIntro*/
             {field: 'scenicLinkman', title: '景点联系人', width: 100},
             {field: 'scenicTel', title: '联系人电话', width: 100},
             {
                 field: 'state', title: '景点审核', width: 100, formatter: function (value, row, index) {
-//                console.group();
-//                console.log(value);
-//                console.log(row);
-//                console.log(index);
-//                console.groupEnd();
                 switch (value) {
                     case 1 :
                         return "正常";
@@ -142,15 +123,15 @@
 
             }
             },
-            {field: '**************', title: '供应商名字', width: 100},/*```````````*/
-            {field: 'price', title: '价格', width: 100},
+            {field: 'username', title: '供应商名字', width: 100},/*```````````*/
+            {field: 'price', title: '价格', sortable: true, width: 100},
             {
-                field: 'createdTime', title: '创建时间', width: 100, formatter: function (value, row, index) {
+                field: 'createdTime', title: '创建时间', width: 100, sortable: true, formatter: function (value, row, index) {
                 return moment(value).format('LL');
             }
             },
             {
-                field: 'updateTime', title: '修改时间', width: 100, formatter: function (value, row, index) {
+                field: 'updateTime', title: '修改时间', width: 100,  sortable: true,formatter: function (value, row, index) {
                 return moment(value).format('LL');
             }
             }

@@ -17,7 +17,7 @@
 <div data-options="region:'south'" style="padding:5px;background:#eee;">
     系统版本：V2.0
 </div>
-<div data-options="region:'west'" style="width:200px;">
+<div data-options="region:'west'" style="width:150px;">
     <div id="menu" class="easyui-accordion">
         <div title="前台网站管理" data-options="selected:true,iconCls:'icon-tip'" style="padding:10px 0;">
             <ul class="easyui-tree">

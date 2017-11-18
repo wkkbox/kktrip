@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tp.trip.dao.TbScenicCustomMapper" >
+  <sql id="Base_Column_List" >
+    s.id, s.scenic_linkman as scenicLinkman, s.scenic_tel as scenicTel, s.scenic_image as scenicImage,
+     s.tid, s.state, s.created_time as createdTime, s.update_time as updateTime,
+    u.username as username, s.price
+  </sql>
+  <sql id="Blob_Column_List" >
+    s.scenic_name as scenicName, s.scenic_intro as scenicIntro, s.scenic_address AS scenicAddress
+  </sql>
+
+  <sql id="where_Column" >
+    <where>
+      s.state !=3
+     <if test="tbScenic != null  and tbScenic.scenicName !=null and tbScenic.scenicName != ''">
+        AND s.scenic_name LIKE '%${tbScenic.scenicName}%'
+      </if>
+      <if test="tbScenic != null and tbScenic.state != null and tbScenic.state != 0 ">
+        AND s.state = #{tbScenic.state}
+      </if>
+      <if test="isSuperUser != null and isSuperUser != 1">
+        AND s.uid =#{tbScenic.uid}
+      </if>
+      /*判断登录状态的是超管还是普通管理员  如果是超管查询所有用户的   如果不是 查询个人的*/
+    </where>
+  </sql>
+
+  <select id="countItems" resultType="int">
+    SELECT COUNT(1) FROM tb_Scenic s
+    <include refid="where_Column" />
+  </select>
+
+  <select id="listItemsByPage" resultType="com.tp.trip.pojo.vo.TbScenicCustom" >
+    SELECT
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    FROM tb_scenic s LEFT JOIN tb_user u
+    ON s.uid=u.id
+
+    <include refid="where_Column" />
+
+    <choose>
+      <when test="order!=null and order.order!=null and order.sort!=null">
+        <foreach collection="order.orderParam" item="item" open="Order By" separator="," close="">
+          <choose>
+            <when test="item eq 'createdTime desc'">
+              s.created_time DESC
+            </when>
+            <when test="item eq 'createdTime asc'">
+              s.created_time asc
+            </when>
+            <when test="item eq 'updateTime desc'">
+              s.update_Time DESC
+            </when>
+            <when test="item eq 'updateTime asc'">
+              s.update_Time asc
+            </when>
+            <otherwise>
+              s.${item}
+            </otherwise>
+          </choose>
+        </foreach>
+      </when>
+      <otherwise>
+        ORDER by s.update_time DESC
+      </otherwise>
+    </choose>
+    limit #{page.offset},#{page.rows}
+  </select>
+
+</mapper>
