@@ -21,7 +21,7 @@ public class TbScenic {
 
     private Long uid;
 
-    private String temp2;
+    private Double price;
 
     private String temp3;
 
@@ -97,12 +97,12 @@ public class TbScenic {
         this.uid = uid;
     }
 
-    public String getTemp2() {
-        return temp2;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setTemp2(String temp2) {
-        this.temp2 = temp2 == null ? null : temp2.trim();
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getTemp3() {
@@ -111,5 +111,22 @@ public class TbScenic {
 
     public void setTemp3(String temp3) {
         this.temp3 = temp3 == null ? null : temp3.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "TbScenic{" +
+                "id=" + id +
+                ", scenicLinkman='" + scenicLinkman + '\'' +
+                ", scenicTel='" + scenicTel + '\'' +
+                ", scenicImage='" + scenicImage + '\'' +
+                ", tid=" + tid +
+                ", state=" + state +
+                ", createdTime=" + createdTime +
+                ", updateTime=" + updateTime +
+                ", uid=" + uid +
+                ", price=" + price +
+                ", temp3='" + temp3 + '\'' +
+                '}';
     }
 }

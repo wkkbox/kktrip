@@ -675,73 +675,63 @@ public class TbScenicExample {
             return (Criteria) this;
         }
 
-        public Criteria andTemp2IsNull() {
-            addCriterion("temp2 is null");
+        public Criteria andPriceIsNull() {
+            addCriterion("price is null");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2IsNotNull() {
-            addCriterion("temp2 is not null");
+        public Criteria andPriceIsNotNull() {
+            addCriterion("price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2EqualTo(String value) {
-            addCriterion("temp2 =", value, "temp2");
+        public Criteria andPriceEqualTo(Double value) {
+            addCriterion("price =", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2NotEqualTo(String value) {
-            addCriterion("temp2 <>", value, "temp2");
+        public Criteria andPriceNotEqualTo(Double value) {
+            addCriterion("price <>", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2GreaterThan(String value) {
-            addCriterion("temp2 >", value, "temp2");
+        public Criteria andPriceGreaterThan(Double value) {
+            addCriterion("price >", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2GreaterThanOrEqualTo(String value) {
-            addCriterion("temp2 >=", value, "temp2");
+        public Criteria andPriceGreaterThanOrEqualTo(Double value) {
+            addCriterion("price >=", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2LessThan(String value) {
-            addCriterion("temp2 <", value, "temp2");
+        public Criteria andPriceLessThan(Double value) {
+            addCriterion("price <", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2LessThanOrEqualTo(String value) {
-            addCriterion("temp2 <=", value, "temp2");
+        public Criteria andPriceLessThanOrEqualTo(Double value) {
+            addCriterion("price <=", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2Like(String value) {
-            addCriterion("temp2 like", value, "temp2");
+        public Criteria andPriceIn(List<Double> values) {
+            addCriterion("price in", values, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2NotLike(String value) {
-            addCriterion("temp2 not like", value, "temp2");
+        public Criteria andPriceNotIn(List<Double> values) {
+            addCriterion("price not in", values, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2In(List<String> values) {
-            addCriterion("temp2 in", values, "temp2");
+        public Criteria andPriceBetween(Double value1, Double value2) {
+            addCriterion("price between", value1, value2, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTemp2NotIn(List<String> values) {
-            addCriterion("temp2 not in", values, "temp2");
-            return (Criteria) this;
-        }
-
-        public Criteria andTemp2Between(String value1, String value2) {
-            addCriterion("temp2 between", value1, value2, "temp2");
-            return (Criteria) this;
-        }
-
-        public Criteria andTemp2NotBetween(String value1, String value2) {
-            addCriterion("temp2 not between", value1, value2, "temp2");
+        public Criteria andPriceNotBetween(Double value1, Double value2) {
+            addCriterion("price not between", value1, value2, "price");
             return (Criteria) this;
         }
 
