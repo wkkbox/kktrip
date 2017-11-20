@@ -42,8 +42,13 @@ public class ScenicAction {
     @ResponseBody
     @RequestMapping("scenic/{batch}")
     public int updateBatch(@RequestParam("ids[]") List<Byte> ids, @PathVariable("batch") String batch) {
-        System.out.println(ids+"   "+batch);
         int i= scenicService.updateBatch(ids,batch);
         return i;
+    }
+
+    @ResponseBody
+    @RequestMapping("/scenicAdd")
+    public int saveItem(TbScenicWithBLOBs tbScenicWithBLOBs){
+        return scenicService.saveItem(tbScenicWithBLOBs);
     }
 }

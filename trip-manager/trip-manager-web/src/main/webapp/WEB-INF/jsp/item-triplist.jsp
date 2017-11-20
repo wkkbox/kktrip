@@ -69,7 +69,7 @@
 
 
     function add() {
-        tktrip.addTabs('新增景点', 'item-add');
+        tktrip.addTab('新增景点', 'item-tripadd');
     }
 
     function edit() {
