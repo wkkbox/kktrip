@@ -18,4 +18,6 @@ public interface ScenicService {
     Result<TbScenicCustom> listItems(Page page, Order order, TbScenicWithBLOBs tbScenic,int isSuperUser);
 
     int updateBatch(List<Byte> ids, String batch);
+
+    int saveItem(TbScenicWithBLOBs tbScenicWithBLOBs);
 }

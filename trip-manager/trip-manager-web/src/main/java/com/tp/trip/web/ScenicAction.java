@@ -45,4 +45,10 @@ public class ScenicAction {
         int i= scenicService.updateBatch(ids,batch);
         return i;
     }
+
+    @ResponseBody
+    @RequestMapping("/scenicAdd")
+    public int saveItem(TbScenicWithBLOBs tbScenicWithBLOBs){
+        return scenicService.saveItem(tbScenicWithBLOBs);
+    }
 }
