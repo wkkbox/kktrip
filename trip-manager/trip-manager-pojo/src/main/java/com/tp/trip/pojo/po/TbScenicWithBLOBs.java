@@ -30,4 +30,13 @@ public class TbScenicWithBLOBs extends TbScenic {
     public void setScenicAddress(String scenicAddress) {
         this.scenicAddress = scenicAddress == null ? null : scenicAddress.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TbScenicWithBLOBs{" +
+                "scenicName='" + scenicName + '\'' +super.getState()+
+                ", scenicIntro='" + scenicIntro + '\'' +
+                ", scenicAddress='" + scenicAddress + '\'' +
+                '}';
+    }
 }

@@ -13,6 +13,14 @@ public class Order {
     private String order;
     private String sort;
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "order='" + order + '\'' +
+                ", sort='" + sort + '\'' +
+                '}';
+    }
+
     /*此方法非常精髓，有get方法mybatis是调用get方法。此方法主要是为了联合排序，个人觉得很鸡肋*/
     public List<String> getOrderParam() {
         /*order is order ruler*/

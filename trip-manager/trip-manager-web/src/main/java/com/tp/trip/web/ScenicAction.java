@@ -3,6 +3,7 @@ package com.tp.trip.web;
 import com.tp.trip.common.dto.Order;
 import com.tp.trip.common.dto.Page;
 import com.tp.trip.common.dto.Result;
+import com.tp.trip.pojo.po.TbScenic;
 import com.tp.trip.pojo.po.TbScenicWithBLOBs;
 import com.tp.trip.pojo.vo.TbScenicCustom;
 import com.tp.trip.service.ScenicService;
@@ -28,22 +29,40 @@ public class ScenicAction {
     @Autowired
     private ScenicService scenicService;
 
+
+    @ResponseBody
+    @RequestMapping(value = "getScenicById/{id}")
+    public void getScenicById(@PathVariable("id") Long id, HttpSession session){
+        session.removeAttribute("scenic");
+        TbScenic tbScenic= scenicService.getScenic(id);
+        session.setAttribute("scenic",tbScenic);
+    }
+
+
+
     @ResponseBody
     @RequestMapping("/scenics")
-    public Result<TbScenicCustom> scenicListByPage(Page page, Order order, TbScenicWithBLOBs tbScenic, HttpSession session){
+    public Result<TbScenicCustom> scenicListByPage(Page page, Order order, TbScenicWithBLOBs tbScenic){
         /*此处session 获取登录用户  判断是否是管理员*/
        /* TbUser user = (TbUser) session.getAttribute("user");
         Integer usertype = user.getUsertype();
         /*这里测试 以超级管理员*/
-        Result<TbScenicCustom> result = scenicService.listItems(page,order,tbScenic,1);
+
+        /*System.out.println(tbScenic.getScenicName() instanceof  String);*/
+        Result<TbScenicCustom> result = scenicService.listItems(page,order,tbScenic);
+
         return result;
     }
 
     @ResponseBody
-    @RequestMapping("scenic/{batch}")
-    public int updateBatch(@RequestParam("ids[]") List<Byte> ids, @PathVariable("batch") String batch) {
+    @RequestMapping("/scenicStatus/{batch}")
+    public int updateBatch(@RequestParam("ids[]") List<Long> ids, @PathVariable("batch") String batch) {
         int i= scenicService.updateBatch(ids,batch);
         return i;
+    }
+    @RequestMapping("scenicUpdate")
+    public int updateSecnic(TbScenicWithBLOBs tbScenicWithBLOBs){
+        return scenicService.updateItem(tbScenicWithBLOBs);
     }
 
     @ResponseBody
@@ -51,4 +70,6 @@ public class ScenicAction {
     public int saveItem(TbScenicWithBLOBs tbScenicWithBLOBs){
         return scenicService.saveItem(tbScenicWithBLOBs);
     }
+
+
 }
