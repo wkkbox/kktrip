@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<div id="toolbar">
+<div id="toolbarhotel">
     <div style="padding: 5px; background-color: #fff;">
         <label>酒店名称：</label>
         <input class="easyui-textbox" type="text" id="title">
@@ -36,7 +36,7 @@
 
 
     function add() {
-        tktrip.addTabs('新增酒店', 'item-add');
+        tktrip.addTab('新增酒店', 'hotel-add');
     }
 
     function edit() {
@@ -65,7 +65,7 @@
                 //把ids异步提交到后台
                 $.post(
                     //url:请求后台的哪个地址来进行处理，相当于url,String类型
-                    'items/batch',
+                    'hotelitems/batch',
                     //data:从前台提交哪些数据给后台处理，相当于data，Object类型
                     {'ids[]': ids},
                     //callback:后台处理成功的回调函数，相当于success，function类型
@@ -80,22 +80,61 @@
         });
     }
 
-    function down() {
-        console.log('down');
-    }
-
-    function up() {
-        console.log('up');
-    }
+    function down(){
+        var downrows= $("#dg").datagrid("getSelections");
+        if (downrows==0){
+            $.messager.alert("提示","至少选择一条记录哟~_~");
+            return ;
+        }
+        $.messager.confirm("确认","是否将选中商品改为下架",function (r) {
+            if(r){
+                var ids=[];
+                for(var i=0;i<downrows.length;i++){
+                    ids.push(downrows[i].id);
+                }
+                $.post(
+                    'hotelitems/downrows',
+                    {"ids[]":ids},
+                    function (data) {
+                        $("#dg").datagrid("reload");
+                    },
+                    'json'
+                )
+            }
+        })
+    };
+    function up(){
+        var  uprows=$('#dg').datagrid("getSelections");
+        if(uprows==0){
+            $.messager.alert("提示","请至少选择一条记录哟^_^!");
+            return ;
+        }
+        $.messager.confirm("确认","选中的商品确定上架？_？",function (r) {
+            if(r){
+                var ids=[];
+                for(var i=0;i<uprows.length;i++){
+                    ids.push(uprows[i].id);
+                }
+                $.post(
+                    'hotelitems/uprows',
+                    {'ids[]':ids},
+                    function (data) {
+                        $('#dg').datagrid('reload');
+                    },
+                    'json'
+                )
+            }
+        })
+    };
 
     //初始化数据表格
     $('#dg').datagrid({
         //允许多列排序
         multiSort: true,
         //将工具栏添加到数据表格中
-        toolbar: '#toolbar',
+        toolbar: '#toolbarhotel',
         //请求远程服务器上的URL
-        url: 'items',
+        url: 'hotellist',
         //隔行变色，斑马线效果
         striped: true,
         //添加分页工具栏
@@ -113,37 +152,13 @@
             //field title width列属性
             {field: 'ck', checkbox: true},
             {field: 'id', title: '酒店编号', width: 100, sortable: true},
-            {field: 'scenicName', title: '酒店名称', width: 100, sortable: true},
-            {field: 'hotelType', title: '酒店等级', width: 100},
-            {field: 'scenicIntro', title: '景点介绍', width: 100},/*scenicIntro*/
+            {field: 'hotelName', title: '酒店名称', width: 100, sortable: true},
+            {field: 'hoteltype', title: '酒店等级', width: 100},
             {field: 'hotelLinkman', title: '酒店联系人', width: 100},
             {field: 'hotelTel', title: '酒店联系方式', width: 100},
-            {field: 'hotelSddress', title: '酒店地址', width: 100},
-            {field: '**********', title: '酒店供应商', width: 100},/*````````*/
-            {
-                field: 'state', title: '酒店状态', width: 100, formatter: function (value, row, index) {
-//                console.group();
-//                console.log(value);
-//                console.log(row);
-//                console.log(index);
-//                console.groupEnd();
-                switch (value) {
-                    case 1 :
-                        return "正常";
-                        break;
-                    case 2:
-                        return "下架";
-                        break;
-                    case 3:
-                        return "删除";
-                        break;
-                    default:
-                        return "未知";
-                        break;
-                }
-
-            }
-            },
+            {field: 'hotelAddress', title: '酒店地址', width: 100},
+            {field: 'username', title: '酒店供应商', width: 100},
+            {field: 'statusName', title: '酒店状态', width: 100},
             {field: 'price', title: '酒店价格', width: 100}
 
         ]]

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tp.trip.dao.TbHotelCustomMapper" >
+
+  <sql id="Base_Column_List" >
+    h.id, h.hotel_name as hotelName, h.hotelType as hoteltype, h.hotel_linkman AS hotelLinkman, h.hotel_tel AS hotelTel, h.hotel_address AS hotelAddress,  h.state,
+    u.username as username,h.price as price,
+    CASE h.state
+    when 1 then'正常'
+    when 2 then'下架'
+    when 3 then'删除'
+    ELSE "未知" END as statusName
+  </sql>
+
+  <sql id="Where_Clause" >
+    <where>
+      <if test="query != null and query.hotelName != null and query.hotelName != '' ">
+        and h.hotelName like '%${query.hotelName}%'
+      </if>
+      <if test="query != null and query.status != null and query.status != 0 ">
+        and h.state = #{query.status}
+      </if>
+    </where>
+  </sql>
+
+  <select id="countItems" resultType="int">
+    select count(1)
+    from tb_hotel h
+  <!--  <include refid="where_caluse"/>-->
+  </select>
+
+  <select id="listItemByPage" parameterType="com.tp.trip.common.dto.Page" resultType="com.tp.trip.pojo.vo.TbHotelCustom">
+    select
+    <include refid="Base_Column_List"/>
+    from tb_hotel h
+    LEFT JOIN tb_user u ON h.uid=u.id
+    <include refid="Where_Clause"/>
+    <choose>
+      <when test="order!=null and order.order!=null and order.sort!=null">
+        <foreach collection="order.orderParam" item="item" open="Order By" separator="," close="">
+          <choose>
+            <when test="item eq 'hotelName desc'">
+              h.hotel_name DESC
+            </when>
+            <when test="item eq 'hotelName asc'">
+              h.hotel_name asc
+            </when>
+            <when test="item eq 'id desc'">
+              h.id DESC
+            </when>
+            <when test="item eq 'id asc'">
+              h.id asc
+            </when>
+            <otherwise>
+              h.${item}
+            </otherwise>
+          </choose>
+        </foreach>
+      </when>
+      <otherwise>
+        ORDER by h.id ASC
+      </otherwise>
+    </choose>
+    limit #{page.offset},#{page.rows}
+
+
+
+  </select>
+<!--
+<when test="order != null and order.sort !=null   and order.order != null">
+        <foreach collection="order.orderParam" item="item" open="order by" close="" separator=",">
+          <choose>
+            <when test="item eq 'sellPoint  desc' ">
+              i.sell_point   desc
+            </when>
+            <when test="item eq 'sellPoint  asc' ">
+              i.sell_point   asc
+            </when>
+            <when test="item eq 'title  asc'">
+              i.title  asc
+            </when>
+            <otherwise>
+              i.title  desc
+            </otherwise>
+          </choose>
+        </foreach>
+      </when>
+
+
+-->
+<!--
+ <choose>
+      <when test="order != null and order.sort != null and order.order != null and order.orderParam != null">
+        <foreach collection="order.orderParam" item="item" open="order by " close="" separator=",">
+          h.${item}
+        </foreach>
+      </when>
+      <otherwise>
+        ORDER BY h.id DESC
+      </otherwise>
+    </choose>
+
+-->
+
+
+
+
+
+</mapper>
