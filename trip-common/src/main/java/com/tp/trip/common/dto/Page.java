@@ -7,6 +7,14 @@ package com.tp.trip.common.dto;
  * Version:V1.0
  */
 public class Page {
+    @Override
+    public String toString() {
+        return "Page{" +
+                "page=" + page +
+                ", rows=" + rows +
+                '}';
+    }
+
     /*前台传过来的当前页*/
     private  int page;
     /*前台传过来的每页数据*/

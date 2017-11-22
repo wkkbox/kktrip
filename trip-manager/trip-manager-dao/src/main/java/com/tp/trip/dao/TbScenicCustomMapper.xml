@@ -13,18 +13,19 @@
   <sql id="where_Column" >
     <where>
       s.state !=3
-     <if test="tbScenic != null  and tbScenic.scenicName !=null and tbScenic.scenicName != ''">
+    <if test="tbScenic != null  and tbScenic.scenicName !=null and tbScenic.scenicName != ''">
         AND s.scenic_name LIKE '%${tbScenic.scenicName}%'
       </if>
-      <if test="tbScenic != null and tbScenic.state != null and tbScenic.state != 0 ">
+      <if test="tbScenic != null and tbScenic.state != null and tbScenic.state != 0  ">
         AND s.state = #{tbScenic.state}
       </if>
-      <if test="isSuperUser != null and isSuperUser != 1">
-        AND s.uid =#{tbScenic.uid}
-      </if>
-      /*判断登录状态的是超管还是普通管理员  如果是超管查询所有用户的   如果不是 查询个人的*/
     </where>
   </sql>
+
+
+  <select id="countItemsTest" resultType="int">
+    SELECT COUNT(1) FROM tb_Scenic s
+  </select>
 
   <select id="countItems" resultType="int">
     SELECT COUNT(1) FROM tb_Scenic s

@@ -43,7 +43,7 @@
             ids.push(selection[i].id);
         }
         $.ajax({
-            url:"scenic/"+batch+"",
+            url:"scenicStatus/"+batch+"",
             data:{"ids[]":ids},
             success:function (data) {
                 $("#dg").datagrid("reload");
@@ -73,7 +73,20 @@
     }
 
     function edit() {
-        console.log('edit');
+        var selection= $('#dg').datagrid('getSelections');
+        if (selection.length>1){
+            $.messager.alert('提示', '只能选择一条信息！');
+            return;
+        }
+        var id=selection[0].id;
+        $.ajax({
+            url:"getScenicById/"+id+"",
+            async:true,
+            success:function (data) {
+                tktrip.addTab('编辑景点', 'item-tripupdate');
+            }
+        });
+        
     }
 
     //初始化数据表格
@@ -101,7 +114,6 @@
             {field: 'id', title: '景点编号', width: 100, sortable: true},
             {field: 'scenicName', title: '景点名称', width: 100},/*scenicname*/
             {field: 'scenicAddress', title: '景点地址', width: 100},/*scenic_address*/
-            {field: 'scenicIntro', title: '景点介绍', width: 100},/*scenicIntro*/
             {field: 'scenicLinkman', title: '景点联系人', width: 100},
             {field: 'scenicTel', title: '联系人电话', width: 100},
             {

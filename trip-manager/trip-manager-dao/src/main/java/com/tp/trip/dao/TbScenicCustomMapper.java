@@ -10,11 +10,13 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface TbScenicCustomMapper {
-    int countItems(@Param("tbScenic") TbScenic tbScenic,@Param("isSuperUser") Integer isSuperUser);
+    int countItems(@Param("tbScenic") TbScenic tbScenic);
     /**
      * 查询指定页码显示记录集合
      * @param page
      * @return
      */
-    List<TbScenicCustom> listItemsByPage(@Param("page") Page page, @Param("order")Order order, @Param("tbScenic") TbScenicWithBLOBs tbScenic,@Param("isSuperUser") Integer isSuperUser);
+
+    int countItemsTest();
+    List<TbScenicCustom> listItemsByPage(@Param("page") Page page, @Param("order")Order order, @Param("tbScenic") TbScenicWithBLOBs tbScenic);
 }

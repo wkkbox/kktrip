@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 public class UserAction {
 
@@ -31,4 +33,11 @@ public class UserAction {
         }
         return findUser;
     }
+
+    @ResponseBody
+    @RequestMapping("allUser")
+    public List<TbUser> listAllUser(){
+        return userService.listAllUser();
+    }
+
 }
