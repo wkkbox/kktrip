@@ -19,4 +19,11 @@ public interface TbScenicCustomMapper {
 
     int countItemsTest();
     List<TbScenicCustom> listItemsByPage(@Param("page") Page page, @Param("order")Order order, @Param("tbScenic") TbScenicWithBLOBs tbScenic);
+
+    /**
+     * 查询所有的国内景点
+     * @param tid
+     * @return
+     */
+    List<TbScenic> listInners(Long tid);
 }
