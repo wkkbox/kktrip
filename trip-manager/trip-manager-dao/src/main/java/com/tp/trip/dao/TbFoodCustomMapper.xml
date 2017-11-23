@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tp.trip.dao.TbFoodCustomMapper" >
+  <sql id="Base_Column_List" >
+    f.id, f.food_name AS foodName, f.scenic_id as scenicId, f.temp1, f.temp2,s.scenic_name AS scenicName
+  </sql>
+  <sql id="Blob_Column_List" >
+    f.food_image as foodImage,
+    FORMAT(f.temp2/100,2) AS priceView,
+      CASE f.temp1
+		WHEN 1 THEN "正常"
+		WHEN 2 THEN "下架"
+		WHEN 3 THEN "删除"
+		ELSE "未知" END as statusName
+  </sql>
+    <sql id="Where_Clause">
+        <where>
+            <if test="tbFoodCustom != null and tbFoodCustom.foodName != null and tbFoodCustom.foodName != ''">
+                and f.food_Name like '%${tbFoodCustom.foodName}%'
+            </if>
+            <if test="tbFoodCustom != null and tbFoodCustom.temp1 != null and tbFoodCustom.temp1 != 0">
+                and f.temp1 = #{tbFoodCustom.temp1}
+            </if>
+        </where>
+    </sql>
+  <select id="countNum" resultType="int">
+    SELECT COUNT(1) FROM tb_food f
+    <include refid="Where_Clause"></include>
+  </select>
+  <select id="listFood" resultType="com.tp.trip.pojo.vo.TbFoodCustom">
+    SELECT
+    <include refid="Base_Column_List"></include>,
+    <include refid="Blob_Column_List"></include>
+    FROM tb_food f LEFT JOIN tb_scenic s ON f.scenic_id=s.id
+      <include refid="Where_Clause"></include>
+    <choose>
+      <when test="order!=null and order.sort!=null and order.order!=null">
+        <foreach collection="order.orderParams" item="item" separator="," close="" open="order by">
+          <if test="item=='foodName desc'">
+            CONVERT (f.food_name USING gbk) DESC
+          </if>
+          <if test="item=='foodName asc'">
+            CONVERT (f.food_name USING gbk) ASC
+          </if>
+          <if test="item!='foodName asc' and item!='foodName desc'">
+            f.${item}
+          </if>
+        </foreach>
+      </when>
+      <otherwise>
+        ORDER BY f.id DESC
+      </otherwise>
+    </choose>
+    limit #{page.offset},#{page.rows}
+  </select>
+  <select id="selectFoodAndScenic" resultType="com.tp.trip.pojo.vo.TbFoodCustom" parameterType="long">
+    SELECT
+    <include refid="Base_Column_List"></include>,
+    <include refid="Blob_Column_List"></include>
+    FROM tb_food f LEFT JOIN tb_scenic s ON f.scenic_id=s.id
+    WHERE f.id=#{id}
+  </select>
+  <update id="updateFoods" parameterType="com.tp.trip.pojo.vo.TbFoodCustom">
+    update tb_food f
+    <set >
+      <if test="foodName != null" >
+        f.food_name = #{foodName},
+      </if>
+      <if test="scenicId != null" >
+        f.scenic_id = #{scenicId},
+      </if>
+      <if test="temp1 != null" >
+        f.temp1 = #{temp1},
+      </if>
+      <if test="temp2 != null" >
+        f.temp2 = #{temp2},
+      </if>
+      <if test="foodImage != null" >
+        f.food_image = #{foodImage},
+      </if>
+    </set>
+    where f.scenic_id = #{scenicId}
+  </update>
+</mapper>

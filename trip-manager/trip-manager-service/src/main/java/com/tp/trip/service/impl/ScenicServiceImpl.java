@@ -1,9 +1,9 @@
 package com.tp.trip.service.impl;
 
-import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 import com.tp.trip.common.dto.Order;
 import com.tp.trip.common.dto.Page;
 import com.tp.trip.common.dto.Result;
+import com.tp.trip.common.dto.TreeNode;
 import com.tp.trip.common.util.IDUtils;
 import com.tp.trip.dao.TbScenicCustomMapper;
 import com.tp.trip.dao.TbScenicMapper;
@@ -15,6 +15,7 @@ import com.tp.trip.service.ScenicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -95,4 +96,19 @@ public class ScenicServiceImpl implements ScenicService{
 
         return i;
     }
+
+    @Override
+    public List<TreeNode> listScenics() {
+        List<TbScenicWithBLOBs> list=scenicCustomMapper.listScenics();
+        List<TreeNode> resultList = new ArrayList<TreeNode>();
+        //遍历原有集合
+        for (int i=0;i<list.size();i++){
+            TreeNode node = new TreeNode();
+            node.setId(list.get(i).getId());
+            node.setText(list.get(i).getScenicName());
+            resultList.add(node);
+        }
+        return resultList;
+    }
+
 }

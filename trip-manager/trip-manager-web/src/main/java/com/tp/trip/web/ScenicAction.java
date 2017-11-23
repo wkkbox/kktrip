@@ -3,6 +3,7 @@ package com.tp.trip.web;
 import com.tp.trip.common.dto.Order;
 import com.tp.trip.common.dto.Page;
 import com.tp.trip.common.dto.Result;
+import com.tp.trip.common.dto.TreeNode;
 import com.tp.trip.pojo.po.TbScenic;
 import com.tp.trip.pojo.po.TbScenicWithBLOBs;
 import com.tp.trip.pojo.vo.TbScenicCustom;
@@ -71,5 +72,11 @@ public class ScenicAction {
         return scenicService.saveItem(tbScenicWithBLOBs);
     }
 
-
+    //美食下拉框显示景点名字
+    @ResponseBody
+    @RequestMapping("/scenicsName")
+    public List<TreeNode> scenicList(){
+        List<TreeNode> list = scenicService.listScenics();
+        return list;
+    }
 }

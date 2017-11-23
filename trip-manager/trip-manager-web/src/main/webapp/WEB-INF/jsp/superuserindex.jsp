@@ -24,7 +24,7 @@
                 <li data-options="attributes:{'href':'item-triplist'}">景点管理</li>
                 <li data-options="attributes:{'href':'item-hotellist'}">酒店管理</li>
                 <li data-options="attributes:{'href':'item-visitorinfolist'}">用户信息</li>
-                <li data-options="attributes:{'href':'item-add'}">美食管理</li>
+                <li data-options="attributes:{'href':'item-foodlist'}">美食管理</li>
                 <li data-options="attributes:{'href':'item-commentlist'}">订单管理</li>
                 <li data-options="attributes:{'href':'item-param-list'}">评论管理</li>
             </ul>

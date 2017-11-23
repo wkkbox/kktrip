@@ -70,5 +70,10 @@
     </choose>
     limit #{page.offset},#{page.rows}
   </select>
-
+<select id="listScenics" resultType="com.tp.trip.pojo.po.TbScenicWithBLOBs">
+  SELECT
+  s.id,
+  <include refid="Blob_Column_List">
+  </include>  FROM tb_scenic s
+</select>
 </mapper>

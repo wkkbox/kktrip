@@ -26,4 +26,6 @@ public interface TbScenicCustomMapper {
      * @return
      */
     List<TbScenic> listInners(Long tid);
+
+    List<TbScenicWithBLOBs> listScenics();
 }

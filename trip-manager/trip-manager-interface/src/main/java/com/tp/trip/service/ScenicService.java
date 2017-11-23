@@ -3,6 +3,7 @@ package com.tp.trip.service;
 import com.tp.trip.common.dto.Order;
 import com.tp.trip.common.dto.Page;
 import com.tp.trip.common.dto.Result;
+import com.tp.trip.common.dto.TreeNode;
 import com.tp.trip.pojo.po.TbScenic;
 import com.tp.trip.pojo.po.TbScenicWithBLOBs;
 import com.tp.trip.pojo.vo.TbScenicCustom;
@@ -25,4 +26,7 @@ public interface ScenicService {
     TbScenic getScenic(Long id);
 
     int updateItem(TbScenicWithBLOBs tbScenicWithBLOBs);
+
+    List<TreeNode> listScenics();
+
 }

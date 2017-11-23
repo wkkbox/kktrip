@@ -22,7 +22,7 @@ public class Order {
     }
 
     /*此方法非常精髓，有get方法mybatis是调用get方法。此方法主要是为了联合排序，个人觉得很鸡肋*/
-    public List<String> getOrderParam() {
+    public List<String> getOrderParams() {
         /*order is order ruler*/
         String[] split1= order.split(",");
         /*sort is order colnum*/
