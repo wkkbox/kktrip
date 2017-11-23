@@ -23,4 +23,7 @@ public interface HotelService {
     int downstate(List<Long> ids);
 
     int savehotel(TbHotel tbHotel);
+    TbHotel selecthotel(Long hotelid);
+
+    int hotelUpdate(TbHotel tbHotel);
 }

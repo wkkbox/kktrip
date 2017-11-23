@@ -58,7 +58,7 @@
         </foreach>
       </when>
       <otherwise>
-        ORDER by h.id ASC
+        ORDER by h.id DESC
       </otherwise>
     </choose>
     limit #{page.offset},#{page.rows}

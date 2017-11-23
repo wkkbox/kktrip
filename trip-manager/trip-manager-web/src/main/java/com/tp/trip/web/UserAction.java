@@ -37,7 +37,9 @@ public class UserAction {
     @ResponseBody
     @RequestMapping("allUser")
     public List<TbUser> listAllUser(){
-        return userService.listAllUser();
+        List<TbUser> tbUsers = userService.listAllUser();
+
+        return tbUsers;
     }
 
 }

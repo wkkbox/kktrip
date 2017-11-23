@@ -40,7 +40,30 @@
     }
 
     function edit() {
-        console.log('edit');
+        var  updaterows=$('#dg').datagrid("getSelections");
+
+        if(updaterows==0||updaterows>1){
+            $.messager.alert("提示","只能选择一条记录修改哦^_^!");
+            return ;
+        }
+        $.messager.confirm("确认","选中的商品确定修改吗？_？",function (r) {
+            if(r){
+                var ids= updaterows[0].id
+
+                $.post(
+                    'hotelitems/updatehotel',
+                    {'ids':ids},
+                    function (data) {
+
+                        if(data!=null){
+                            tktrip.addTab('修改酒店', 'hotel-update');
+                        }
+
+                    },
+                    'json'
+                )
+            }
+        })
     }
 
     function remove() {
@@ -82,6 +105,7 @@
 
     function down(){
         var downrows= $("#dg").datagrid("getSelections");
+
         if (downrows==0){
             $.messager.alert("提示","至少选择一条记录哟~_~");
             return ;
@@ -153,7 +177,28 @@
             {field: 'ck', checkbox: true},
             {field: 'id', title: '酒店编号', width: 100, sortable: true},
             {field: 'hotelName', title: '酒店名称', width: 100, sortable: true},
-            {field: 'hoteltype', title: '酒店等级', width: 100},
+            {
+                field: 'hoteltype', title: '酒店等级', width: 100, formatter: function (value, row, index) {
+                switch (value) {
+                    case 0 :
+                        return "无星";
+                        break;
+                    case 3:
+                        return "三星";
+                        break;
+                    case 4:
+                        return "四星";
+                        break;
+                    case 5:
+                        return "五星";
+                        break;
+                    default:
+                        return "未知";
+                        break;
+                }
+
+            }
+            },
             {field: 'hotelLinkman', title: '酒店联系人', width: 100},
             {field: 'hotelTel', title: '酒店联系方式', width: 100},
             {field: 'hotelAddress', title: '酒店地址', width: 100},

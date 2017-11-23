@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -78,6 +79,27 @@ public class HotelAction {
     @RequestMapping("hotelitem")
     public int savehotel(TbHotel tbHotel){
         int i = hotelService.savehotel(tbHotel);
+        return i;
+    }
+
+    /**
+     * 查询单个酒店
+     * @param ids
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("hotelitems/updatehotel")
+    public TbHotel seletehotel(@RequestParam("ids") String ids ,HttpServletRequest request ){
+        Long hotelid = Long.parseLong(ids);
+        TbHotel selecthotel = hotelService.selecthotel(hotelid);
+        request.getSession().setAttribute("selecthotel",selecthotel );
+        return selecthotel;
+    }
+    @ResponseBody
+    @RequestMapping("hotelitems/updatehotelone")
+    public int hotelUpdate(TbHotel tbHotel){
+        int i = hotelService.hotelUpdate(tbHotel);
         return i;
     }
 }

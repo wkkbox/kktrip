@@ -3,6 +3,8 @@ package com.tp.trip.service.impl;
 import com.tp.trip.common.dto.Order;
 import com.tp.trip.common.dto.Page;
 import com.tp.trip.common.dto.Result;
+import com.tp.trip.common.util.IDUtils;
+import com.tp.trip.common.util.JsonUtils;
 import com.tp.trip.dao.TbHotelCustomMapper;
 import com.tp.trip.dao.TbHotelMapper;
 import com.tp.trip.pojo.po.TbHotel;
@@ -86,11 +88,47 @@ public class HotelServiceImpl implements HotelService{
 
     }
 
+    /**
+     * 增加酒店
+     * @param tbHotel
+     * @return
+     */
     @Override
     public int savehotel(TbHotel tbHotel) {
         Byte i=(byte)2;
         tbHotel.setState(i);
+        String hotelImage = tbHotel.getHotelImage();
+        if (hotelImage!=null){
+            String image=hotelImage.substring(hotelImage.indexOf("http://"), hotelImage.indexOf(".jpg")+4);
+            tbHotel.setHotelImage(image);
+        }
+        long itemId = IDUtils.getItemId();
+        tbHotel.setId(itemId);
         int insert = tbHotelDao.insert(tbHotel);
         return insert;
+    }
+    /**
+     * 查询出单个酒店
+     */
+    @Override
+    public TbHotel selecthotel(Long hotelid) {
+        long id=hotelid;
+        TbHotel tbHotel = tbHotelDao.selectByPrimaryKey(id);
+        return tbHotel;
+    }
+
+    @Override
+    public int hotelUpdate(TbHotel tbHotel) {
+        /*TbHotelExample example=new TbHotelExample();
+        TbHotelExample.Criteria criteria = example.createCriteria();*/
+
+        System.out.println(tbHotel.getId());
+        String hotelImage = tbHotel.getHotelImage();
+        if (hotelImage!=null){
+            String image=hotelImage.substring(hotelImage.indexOf("http://"), hotelImage.indexOf(".jpg")+4);
+            tbHotel.setHotelImage(image);
+        }
+        int i = tbHotelDao.updateByPrimaryKey(tbHotel);
+        return i;
     }
 }
