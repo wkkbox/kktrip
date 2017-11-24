@@ -12,6 +12,7 @@
     <modules>
         <module>../trip-common</module>
         <module>../trip-manager</module>
+        <module>../trip-portal-web</module>
     </modules>
 
     <!--相关jar的版本号属性-->

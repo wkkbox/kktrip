@@ -12,6 +12,7 @@
         <module name="trip-manager-pojo" />
         <module name="trip-manager-service" />
         <module name="trip-manager-web" />
+        <module name="trip-portal-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -23,6 +24,7 @@
       <module name="trip-manager-service" target="1.8" />
       <module name="trip-manager-web" target="1.8" />
       <module name="trip-parent" target="1.8" />
+      <module name="trip-portal-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

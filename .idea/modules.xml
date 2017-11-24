@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/trip-manager/trip-manager-service/trip-manager-service.iml" filepath="$PROJECT_DIR$/trip-manager/trip-manager-service/trip-manager-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/trip-manager/trip-manager-web/trip-manager-web.iml" filepath="$PROJECT_DIR$/trip-manager/trip-manager-web/trip-manager-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/trip-parent/trip-parent.iml" filepath="$PROJECT_DIR$/trip-parent/trip-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trip-portal-web/trip-portal-web.iml" filepath="$PROJECT_DIR$/trip-portal-web/trip-portal-web.iml" />
     </modules>
   </component>
 </project>

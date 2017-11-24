@@ -10,6 +10,11 @@
     s.scenic_name as scenicName, s.scenic_intro as scenicIntro, s.scenic_address AS scenicAddress
   </sql>
 
+  <sql id="Base_Column_tour_List">
+    s.id, s.scenic_linkman as scenicLinkman, s.scenic_tel as scenicTel, s.scenic_image as scenicImage,
+    s.tid, s.state, s.created_time as createdTime, s.update_time as updateTime,s.price
+  </sql>
+
   <sql id="where_Column" >
     <where>
       s.state !=3
@@ -21,6 +26,72 @@
       </if>
     </where>
   </sql>
+
+
+  <!--按条件查询景点的总记录数-->
+  <select id="countScenic" parameterType="com.tp.trip.pojo.po.TbScenicWithBLOBs" resultType="java.lang.Integer">
+    SELECT count(1) FROM tb_Scenic s
+    <where>
+      <if test="scenicName != null and scenicName != '' ">
+        s.scenic_name like CONCAT('%',#{scenicName},'%')
+      </if>
+      <if test="tid != null and tid != '' ">
+        and s.tid = #{tid}
+      </if>
+    </where>
+  </select>
+
+  <!--按条件查询所有景点-->
+  <select id="listScenic" parameterType="java.util.Map" resultType="com.tp.trip.pojo.po.TbScenicWithBLOBs">
+    SELECT
+    <include refid="Base_Column_tour_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    FROM tb_scenic s
+    <where>
+      <if test="scenic.scenicName != null and scenic.scenicName != '' ">
+        s.scenic_name like CONCAT('%',#{scenic.scenicName},'%')
+      </if>
+      <if test="scenic.tid != null and scenic.tid != '' ">
+        and s.tid = #{scenic.tid}
+      </if>
+    </where>
+    order by s.id
+    limit #{currentPage} , #{pageSize}
+  </select>
+
+  <!--查询所有的国内景点-->
+  <select id="listInners" resultType="com.tp.trip.pojo.po.TbScenicWithBLOBs">
+    SELECT
+    <include refid="Base_Column_tour_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    FROM tb_scenic s
+    WHERE s.tid = 1
+    limit 0,3
+  </select>
+
+  <!--查询所有的境外景点-->
+  <select id="listOutters" resultType="com.tp.trip.pojo.po.TbScenicWithBLOBs">
+    SELECT
+    <include refid="Base_Column_tour_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    FROM tb_scenic s
+    WHERE s.tid = 2
+    limit 0,3
+  </select>
+
+  <!--查询所有的跟团景点-->
+  <select id="listArounds" resultType="com.tp.trip.pojo.po.TbScenicWithBLOBs">
+    SELECT
+    <include refid="Base_Column_tour_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    FROM tb_scenic s
+    WHERE s.tid = 3
+    limit 0,3
+  </select>
 
 
   <select id="countItemsTest" resultType="int">
