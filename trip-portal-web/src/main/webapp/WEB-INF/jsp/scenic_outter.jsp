@@ -47,7 +47,7 @@
                             str += "<tr>";
                             str += '<input type="hidden" name="id" value="'+list[i].id+'"/>';
                             str += '<td width="230px">';
-                            str += '<div><img src="'+list[i].scenicImage+'" /></div>';
+                            str += '<div><a href="${pageContext.request.contextPath}/scenic/'+list[i].id+'"><img src="'+list[i].scenicImage+'" /></a></div>';
                             str += '</td>';
                             str += '<td>';
                             str += '<p>'+list[i].scenicName+'</p>';

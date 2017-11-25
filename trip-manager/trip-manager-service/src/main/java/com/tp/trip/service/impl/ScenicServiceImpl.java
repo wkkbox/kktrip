@@ -26,7 +26,7 @@ import java.util.List;
  * Version:V1.0
  */
 @Service
-public class ScenicServiceImpl implements ScenicService{
+public class ScenicServiceImpl implements ScenicService {
 
     @Autowired
     private TbScenicCustomMapper scenicCustomMapper;
@@ -34,15 +34,15 @@ public class ScenicServiceImpl implements ScenicService{
     @Autowired
     private TbScenicMapper tbScenicMapper;
 
-   /*查找景点  分页  以及搜索*/
+    /*查找景点  分页  以及搜索*/
     @Override
-    public Result<TbScenicCustom> listItems(Page page, Order order, TbScenicWithBLOBs tbScenic){
+    public Result<TbScenicCustom> listItems(Page page, Order order, TbScenicWithBLOBs tbScenic) {
         int test = scenicCustomMapper.countItemsTest();
         int i = scenicCustomMapper.countItems(tbScenic);
         List<TbScenicCustom> tbScenics = scenicCustomMapper.listItemsByPage(page, order, tbScenic);
 
 
-        Result<TbScenicCustom> result=new Result<>();
+        Result<TbScenicCustom> result = new Result<>();
         result.setTotal(i);
 
         result.setRows(tbScenics);
@@ -55,7 +55,7 @@ public class ScenicServiceImpl implements ScenicService{
         long itemId = IDUtils.getItemId();
         tbScenicWithBLOBs.setId(itemId);
         String scenicIntro = tbScenicWithBLOBs.getScenicIntro();
-        if (scenicIntro!=null){
+        if (scenicIntro != null) {
             String image = scenicIntro.substring(scenicIntro.indexOf("http://"), scenicIntro.indexOf(".jpg") + 4);
             tbScenicWithBLOBs.setScenicImage(image);
         }
@@ -80,17 +80,17 @@ public class ScenicServiceImpl implements ScenicService{
     /*控制景点的上架和下架以及删除*/
     @Override
     public int updateBatch(List<Long> ids, String batch) {
-        TbScenicExample example=new TbScenicExample();
+        TbScenicExample example = new TbScenicExample();
         TbScenicExample.Criteria criteria = example.createCriteria();
         criteria.andIdIn(ids);
         System.out.println(ids);
-        TbScenicWithBLOBs record =new TbScenicWithBLOBs();
-        if ("batchRemove".equals(batch)){
-            record.setState((byte)3);
-        } else if ("batchUp".equals(batch)){
-            record.setState((byte)1);
-        }else if("batchDown".equals(batch)){
-            record.setState((byte)2);
+        TbScenicWithBLOBs record = new TbScenicWithBLOBs();
+        if ("batchRemove".equals(batch)) {
+            record.setState((byte) 3);
+        } else if ("batchUp".equals(batch)) {
+            record.setState((byte) 1);
+        } else if ("batchDown".equals(batch)) {
+            record.setState((byte) 2);
         }
         int i = tbScenicMapper.updateByExampleSelective(record, example);
 
@@ -99,16 +99,29 @@ public class ScenicServiceImpl implements ScenicService{
 
     @Override
     public List<TreeNode> listScenics() {
-        List<TbScenicWithBLOBs> list=scenicCustomMapper.listScenics();
+        List<TbScenicWithBLOBs> list = scenicCustomMapper.listScenics();
         List<TreeNode> resultList = new ArrayList<TreeNode>();
         //遍历原有集合
-        for (int i=0;i<list.size();i++){
+        for (int i = 0; i < list.size(); i++) {
             TreeNode node = new TreeNode();
             node.setId(list.get(i).getId());
             node.setText(list.get(i).getScenicName());
             resultList.add(node);
         }
         return resultList;
+    }
+
+    @Override
+    public TbScenicWithBLOBs getScenicWithBlobskById(Long scenicId) {
+        TbScenicWithBLOBs scenic = null;
+        TbScenicExample example = new TbScenicExample();
+        TbScenicExample.Criteria criteria = example.createCriteria();
+        criteria.andIdEqualTo(scenicId);
+        List<TbScenicWithBLOBs> list = tbScenicMapper.selectByExampleWithBLOBs(example);
+        if (list != null && list.size() > 0) {
+            scenic = list.get(0);
+        }
+        return scenic;
     }
 
 }

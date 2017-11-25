@@ -29,4 +29,5 @@ public interface ScenicService {
 
     List<TreeNode> listScenics();
 
+    TbScenicWithBLOBs getScenicWithBlobskById(Long scenicId);
 }

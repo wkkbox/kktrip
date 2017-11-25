@@ -213,7 +213,7 @@
                             <img style="width: 222px;height: 140px" src="${item.scenicImage}"/>
                             <p>
                                 ${item.scenicName}
-                                <a class="btn" name="${item.id}" href="scenic_detail.html">详情 »</a>
+                                <a class="btn" href="scenic/${item.id}">详情 »</a>
                             </p>
                         </div>
                     </div>
@@ -257,7 +257,7 @@
                             <img style="width: 222px;height: 140px" src="${item.scenicImage}"/>
                             <p>
                                     ${item.scenicName}
-                                <a class="btn" name="${item.id}" href="scenic_detail.html">详情 »</a>
+                                <a class="btn" href="scenic/${item.id}">详情 »</a>
                             </p>
                         </div>
                     </div>
@@ -300,7 +300,7 @@
                             <img style="width: 222px;height: 140px" src="${item.scenicImage}"/>
                             <p>
                                     ${item.scenicName}
-                                <a class="btn" name="${item.id}" href="scenic_detail.html">详情 »</a>
+                                <a class="btn" href="scenic/${item.id}">详情 »</a>
                             </p>
                         </div>
                     </div>
@@ -342,11 +342,10 @@
         $('#banner_tabs .flex-next').click(function () {
             bannerSlider.next()
         });
+
     })
 </script>
-<script type="text/javascript">
-  //alert("sas")
-</script>
+
 
 </body>
 
