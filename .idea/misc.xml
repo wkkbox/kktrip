@@ -3,6 +3,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/trip-manager/trip-manager-web" />
     <file type="web" url="file://$PROJECT_DIR$/trip-portal-web" />
+    <file type="web" url="file://$PROJECT_DIR$/trip-portal-web2" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

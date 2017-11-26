@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="trip-portal-web2:war">
+    <output-path>$PROJECT_DIR$/trip-portal-web2/target</output-path>
+    <root id="archive" name="trip-portal-web2.war">
+      <element id="artifact" artifact-name="trip-portal-web2:war exploded" />
+    </root>
+  </artifact>
+</component>
