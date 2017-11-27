@@ -54,7 +54,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="label">酒店地址：</td>${selecthotel.hotelImage}
+                <td class="label">酒店地址：</td>
                 <td>
                     <input class="easyui-textbox" name="hotelAddress" id="hotelAddress" style="width:60%"   data-options="required:true">
                 </td>

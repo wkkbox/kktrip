@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tp.trip.dao.TbOrderCustomMapper" >
+  <sql id="Base_Column_List" >
+    o.id, o.user_id AS userId, o.hotel_id AS hotelId,u.username,h.hotel_name AS hotelName,
+    o.created_time AS createdTime, o.update_time AS updateTime,oi.in_time AS inTime,oi.out_time as outTime,
+    o.temp1, o.temp2, o.temp3,o.total,oi.subtotal,o.state,
+    CASE o.state
+		WHEN 1 THEN "已受理"
+		WHEN 2 THEN "未受理"
+		ELSE "未知" END as stateName
+  </sql>
+    <sql id="Where_Clause">
+        <where>
+            o.user_id!=1
+            <if test="tbOrderCustom != null and tbOrderCustom.username != null and tbOrderCustom.username != ''">
+                and u.username like '%${tbOrderCustom.username}%'
+            </if>
+            <if test="tbOrderCustom != null and tbOrderCustom.hotelName != null and tbOrderCustom.hotelName != ''">
+                and h.hotel_name like '%${tbOrderCustom.hotelName}%'
+            </if>
+            <if test="tbOrderCustom != null and tbOrderCustom.state != null and tbOrderCustom.state != 0">
+                and o.state = #{tbOrderCustom.state}
+            </if>
+        </where>
+    </sql>
+  <select id="countOrder" resultType="int">
+      SELECT COUNT(1) FROM tb_order o LEFT JOIN  tb_order_item oi ON o.id=oi.order_id
+      LEFT JOIN tb_user u ON o.user_id=u.id
+      LEFT JOIN tb_hotel h ON o.hotel_id=h.id
+      <include refid="Where_Clause"></include>
+  </select>
+    <select id="listOrdersByPage" resultType="com.tp.trip.pojo.vo.TbOrderCustom">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM tb_order o LEFT JOIN  tb_order_item oi ON o.id=oi.order_id
+        LEFT JOIN tb_user u ON o.user_id=u.id
+        LEFT JOIN tb_hotel h ON o.hotel_id=h.id
+        <include refid="Where_Clause"></include>
+        <choose>
+            <when test="order!=null and order.sort!=null and order.order!=null">
+                <foreach collection="order.orderParams" item="item" separator="," close="" open="order by">
+                    <if test="item=='username desc'">
+                        CONVERT (u.username USING gbk) DESC
+                    </if>
+                    <if test="item=='username asc'">
+                        CONVERT (u.username USING gbk) ASC
+                    </if>
+                    <if test="item=='hotelName desc'">
+                        CONVERT (h.hotel_name USING gbk) DESC
+                    </if>
+                    <if test="item=='hotelName asc'">
+                        CONVERT (h.hotel_name USING gbk) ASC
+                    </if>
+                    <if test="item!='hotelName asc' and item!='hotelName desc' and item!='username asc' and item!='username desc'">
+                        o.${item}
+                    </if>
+                </foreach>
+            </when>
+            <otherwise>
+                ORDER BY o.id DESC
+            </otherwise>
+        </choose>
+        limit #{page.offset},#{page.rows}
+    </select>
+    <select id="getOrder" resultType="com.tp.trip.pojo.vo.TbOrderCustom" parameterType="long">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM tb_order o LEFT JOIN  tb_order_item oi ON o.id=oi.order_id
+        LEFT JOIN tb_user u ON o.user_id=u.id
+        LEFT JOIN tb_hotel h ON o.hotel_id=h.id
+        WHERE o.id=#{id}
+    </select>
+    <update id="updateOrders" parameterType="com.tp.trip.pojo.vo.TbOrderCustom">
+        update tb_order o,tb_order_item oi
+        <set>
+            <if test="userId != null" >
+                o.user_id = #{userId},
+            </if>
+            <if test="hotelId != null" >
+                o.hotel_id = #{hotelId},
+            </if>
+            <if test="state != null" >
+                o.state = #{state},
+            </if>
+            <if test="createdTime != null" >
+                o.created_time = #{createdTime},
+            </if>
+            <if test="updateTime != null" >
+                o.update_time = #{updateTime},
+            </if>
+            <if test="total != null" >
+                o.total = #{total},
+            </if>
+            <if test="subtotal != null" >
+                oi.subtotal = #{subtotal},
+            </if>
+            <if test="inTime != null" >
+                oi.in_time = #{inTime},
+            </if>
+            <if test="outTime != null" >
+                oi.out_time = #{outTime},
+            </if>
+        </set>
+        where o.id = #{id} AND oi.order_id=#{id}
+    </update>
+</mapper>

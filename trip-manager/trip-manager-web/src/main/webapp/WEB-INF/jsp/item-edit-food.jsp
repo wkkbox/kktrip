@@ -16,7 +16,7 @@
             <tr>
                 <td class="label">景点名称：</td>
                 <td>
-                    <input readonly="scenicName" class="easyui-textbox" type="text" id="scenicName" name="scenicName"
+                    <input disabled="disabled" readonly="scenicName" class="easyui-textbox" type="text" id="scenicName" name="scenicName"
                            data-options="validType:'length[0,150]',multiline:true" style="width:100%;height:60px;" value="${food.scenicName}">
                 </td>
             </tr>

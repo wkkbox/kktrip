@@ -25,8 +25,8 @@
                 <li data-options="attributes:{'href':'item-hotellist'}">酒店管理</li>
                 <li data-options="attributes:{'href':'item-visitorinfolist'}">用户信息</li>
                 <li data-options="attributes:{'href':'item-foodlist'}">美食管理</li>
-                <li data-options="attributes:{'href':'item-commentlist'}">订单管理</li>
-                <li data-options="attributes:{'href':'item-param-list'}">评论管理</li>
+                <li data-options="attributes:{'href':'item-orderlist'}">订单管理</li>
+                <li data-options="attributes:{'href':'item-commentlist'}">评论管理</li>
             </ul>
         </div>
         <div title="网站内容管理" data-options="iconCls:'icon-tip'" style="padding:10px 0;">
