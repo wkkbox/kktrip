@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tp.trip.dao.TbFoodPortalMapper" >
+  <sql id="Base_Column_List" >
+    f.id, f.food_name as foodName, f.food_image as foodImage,f.scenic_id as scenicId, f.temp1, f.temp2
+  </sql>
+<!--  <sql id="Blob_Column_List" >
+    FORMAT(f.temp2/100,2) AS priceView,
+
+  </sql>-->
+  <!--查询美食的总记录数-->
+  <select id="foodCount" parameterType="com.tp.trip.pojo.po.TbFood" resultType="java.lang.Integer">
+    SELECT count(1) FROM tb_food f
+    <where>
+      <if test="foodName != null and foodName != '' ">
+        f.food_name like CONCAT('%',#{foodName},'%')
+      </if>
+    </where>
+  </select>
+  <!--按条件查询所有美食-->
+  <select id="listFood" resultType="com.tp.trip.pojo.po.TbFood" parameterType="java.util.Map">
+    SELECT
+  <include refid="Base_Column_List"/>
+   <!-- <include refid="Blob_Column_List"/>-->
+    from tb_food f
+    <where>
+      <if test="food.foodName!=null and food.foodName!=''">
+        f.food_name LIKE CONCAT('%',#{food.foodName},'%')
+      </if>
+    </where>
+    order by f.id
+    limit #{currentPage} , #{pageSize}
+
+  </select>
+
+</mapper>

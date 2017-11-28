@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="Maven: org.codehaus.woodstox:wstx-asl:3.2.7">
     <CLASSES>
+<<<<<<< Updated upstream
       <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/woodstox/wstx-asl/3.2.7/wstx-asl-3.2.7.jar!/" />
     </CLASSES>
     <JAVADOC>
@@ -8,6 +9,15 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/woodstox/wstx-asl/3.2.7/wstx-asl-3.2.7-sources.jar!/" />
+=======
+      <root url="jar://E:/maven/apache-maven-3.3.9/repo/org/codehaus/woodstox/wstx-asl/3.2.7/wstx-asl-3.2.7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://E:/maven/apache-maven-3.3.9/repo/org/codehaus/woodstox/wstx-asl/3.2.7/wstx-asl-3.2.7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://E:/maven/apache-maven-3.3.9/repo/org/codehaus/woodstox/wstx-asl/3.2.7/wstx-asl-3.2.7-sources.jar!/" />
+>>>>>>> Stashed changes
     </SOURCES>
   </library>
 </component>

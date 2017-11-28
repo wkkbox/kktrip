@@ -78,7 +78,7 @@
                         <a href="blog.html">酒店</a>
                     </li>
                     <li>
-                        <a href="contact.html">美食</a>
+                        <a href="tour/food_list">美食</a>
                     </li>
                 </ul>
                 <div class="clearfix"></div>

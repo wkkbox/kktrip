@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="Maven: org.quartz-scheduler:quartz:2.2.2">
     <CLASSES>
+<<<<<<< Updated upstream
       <root url="jar://$MAVEN_REPOSITORY$/org/quartz-scheduler/quartz/2.2.2/quartz-2.2.2.jar!/" />
     </CLASSES>
     <JAVADOC>
@@ -8,6 +9,15 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/quartz-scheduler/quartz/2.2.2/quartz-2.2.2-sources.jar!/" />
+=======
+      <root url="jar://E:/maven/apache-maven-3.3.9/repo/org/quartz-scheduler/quartz/2.2.2/quartz-2.2.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://E:/maven/apache-maven-3.3.9/repo/org/quartz-scheduler/quartz/2.2.2/quartz-2.2.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://E:/maven/apache-maven-3.3.9/repo/org/quartz-scheduler/quartz/2.2.2/quartz-2.2.2-sources.jar!/" />
+>>>>>>> Stashed changes
     </SOURCES>
   </library>
 </component>
