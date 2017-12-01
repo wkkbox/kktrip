@@ -14,6 +14,7 @@
         <module name="trip-manager-web" />
         <module name="trip-portal-web" />
         <module name="trip-portal-web2" />
+        <module name="trip-search-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -27,6 +28,7 @@
       <module name="trip-parent" target="1.8" />
       <module name="trip-portal-web" target="1.8" />
       <module name="trip-portal-web2" target="1.8" />
+      <module name="trip-search-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

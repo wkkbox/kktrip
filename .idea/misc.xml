@@ -4,6 +4,7 @@
     <file type="web" url="file://$PROJECT_DIR$/trip-manager/trip-manager-web" />
     <file type="web" url="file://$PROJECT_DIR$/trip-portal-web" />
     <file type="web" url="file://$PROJECT_DIR$/trip-portal-web2" />
+    <file type="web" url="file://$PROJECT_DIR$/trip-search-web" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

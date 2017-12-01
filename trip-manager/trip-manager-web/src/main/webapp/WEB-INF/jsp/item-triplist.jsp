@@ -78,7 +78,7 @@
             $.messager.alert('提示', '只能选择一条信息！');
             return;
         }
-        var id=selection[0].id;
+        var id = selection[0].id;
         $.ajax({
             url:"getScenicById/"+id+"",
             async:true,

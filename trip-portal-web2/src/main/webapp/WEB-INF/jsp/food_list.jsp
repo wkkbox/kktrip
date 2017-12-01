@@ -73,7 +73,7 @@
                     cache: false,
                     asynch: true,
                     success: function (data) {
-                        alert(data);
+                        //alert(data);
                         console.log(data);
                         /*
                         *
@@ -100,7 +100,7 @@
                             str += '<a href="${pageContext.request.contextPath}/scenic/'+list[i].id+'"><img src="'+list[i].foodImage+'" class="img-responsive zoom-img " style="width: 360px;height: 240px" /></a>';
                             str += '<div class="caption tour-caption">';
                             str += '<h3><a>'+list[i].foodName+'</a></h3>';
-                            str += '<p>'+list[i].temp1+'</p>';
+                            //str += '<p>'+list[i].temp1+'</p>';
                             str += '<p>￥'+foodPrice+'</p>';
                             str += '</div></div></div>';
                         }
@@ -175,7 +175,7 @@
                         <a href="blog.html">酒店</a>
                     </li>
                     <li>
-                        <a href="contact.html">美食</a>
+                        <a href="${pageContext.request.contextPath}/tour/food_list">美食</a>
                     </li>
                 </ul>
                 <div class="clearfix"> </div>
